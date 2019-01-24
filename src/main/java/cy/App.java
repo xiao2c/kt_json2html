@@ -35,15 +35,6 @@ public final class App {
 	private App() {
 	}
 
-	/**
-	 * Says hello to the world.
-	 * 
-	 * @param args The arguments of the program.
-	 * @throws IOException
-	 * @throws ParseException
-	 * @throws MalformedTemplateNameException
-	 * @throws TemplateNotFoundException
-	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("\n\n==== CY APP Start ====\n");
 
