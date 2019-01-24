@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html>
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.theme.default.min.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-treetable@3.2.0-1/jquery.treetable.min.js"></script>
+<style>
+	.cat-option-text {
+		cursor: pointer;
+	}
+</style>
 
-<head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.theme.default.min.css" />
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery-treetable@3.2.0-1/jquery.treetable.min.js"></script>
-	<style>
-		.cat-option-text {
-				cursor: pointer;
-			}
-	</style>
-</head>
-
-<body>
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form>
 	<input type="hidden" name="SelectedInstance" value="">
 
 	<div id="welcome_page" style="display:none">
@@ -513,7 +511,6 @@
 							$("#debug_area").html("selectedCategories = " + JSON.stringify(selectedCategories.sort()) + "<br>kindtype = " + kt);
 							stage_2(kt);
 						} else {
-							// TODO: check if there is no more category to select. then should ask user to enter a type and go stage 3
 							let shown = $("div[id^='cat_childset_']:visible").length;
 							$("#debug_area").html("selectedCategories = " + JSON.stringify(selectedCategories.sort()) + "<br>shown=" + shown);
 							if (shown === 0) {
@@ -527,6 +524,4 @@
 			stage_0();
 		});
 	</script>
-</body>
-
-</html>
+</crowd-form>
