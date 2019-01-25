@@ -37,17 +37,18 @@
 		<strong>Select a sub-category under ENTITY:</strong><br>
 		<input type="radio" name="cat_radio_ENTITY_0" value="cat_ABSTRACT"> <span class="cat-option-text" id="cat_ABSTRACT">ABSTRACT</span><br>
 		<input type="radio" name="cat_radio_ENTITY_0" value="cat_REAL"> <span class="cat-option-text" id="cat_REAL">REAL</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_childset_ENTITY_1">
 		<strong>Select a sub-category under ENTITY:</strong><br>
 		<input type="radio" name="cat_radio_ENTITY_1" value="cat_INDIVIDUAL"> <span class="cat-option-text" id="cat_INDIVIDUAL">INDIVIDUAL</span><br>
 		<input type="radio" name="cat_radio_ENTITY_1" value="cat_COLLECTIVE"> <span class="cat-option-text" id="cat_COLLECTIVE">COLLECTIVE</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_ENTITY_dialog" style="display:none">
 		<div id="cat_ENTITY_description">The root node</div>
 		<div id="cat_ENTITY_examples">woman, law, football, sentence, forest, aircraft, tiger, nurse</div>
+		<div id="cat_ENTITY_features">[{"feature_name":"inext","example":"bird (if the entity is \"robin\")","explain":"The extension of the word \"dog\" is the set of all (past, present and future) dogs in the world: e.g. Fido, Rover, Lassie, Rex, and so on."},{"feature_name":"haspart","example":"Trunk (an elephant has a trunk)","explain":"Has a part"},{"feature_name":"part_of","example":"Herd (an elephant is part of a herd)","explain":"Describes any collective the entity belongs to"},{"feature_name":"exp","example":"(love is experienced as) a warm fuzzy feeling in your heart","explain":"Experienced as ..."},{"feature_name":"prototype","example":"robin (if the category is)","explain":"The first example that comes to mind when thinking of this category"},{"feature_name":"source","example":"","explain":"Where does this entity come from?"},{"feature_name":"associated_with","example":"","explain":"Associated with"}]</div>
 	</div>
 	<div id="cat_childset_ABSTRACT_0">
 		<strong>Select a sub-category under ABSTRACT:</strong><br>
@@ -56,230 +57,263 @@
 		<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_QUANTITY"> <span class="cat-option-text" id="cat_QUANTITY">QUANTITY</span><br>
 		<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_IRREAL"> <span class="cat-option-text" id="cat_IRREAL">IRREAL</span><br>
 		<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_QUALITY"> <span class="cat-option-text" id="cat_QUALITY">QUALITY</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_ABSTRACT_dialog" style="display:none">
 		<div id="cat_ABSTRACT_description">Something that doesn't exist physically, nor is an event</div>
 		<div id="cat_ABSTRACT_examples">law, sentence, safety, inch, justice, order</div>
+		<div id="cat_ABSTRACT_features">[{"feature_name":"unknown","example":"","explain":"Placeholder for any features the user is unable to classify."}]</div>
 	</div>
 	<div id="cat_childset_REAL_0">
 		<strong>Select a sub-category under REAL:</strong><br>
 		<input type="radio" name="cat_radio_REAL_0" value="cat_PHYSICAL"> <span class="cat-option-text" id="cat_PHYSICAL">PHYSICAL</span><br>
 		<input type="radio" name="cat_radio_REAL_0" value="cat_TEMPORAL"> <span class="cat-option-text" id="cat_TEMPORAL">TEMPORAL</span><br>
 		<input type="radio" name="cat_radio_REAL_0" value="cat_SENTIENT"> <span class="cat-option-text" id="cat_SENTIENT">SENTIENT</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_childset_REAL_1">
 		<strong>Select a sub-category under REAL:</strong><br>
 		<input type="radio" name="cat_radio_REAL_1" value="cat_NATURAL"> <span class="cat-option-text" id="cat_NATURAL">NATURAL</span><br>
 		<input type="radio" name="cat_radio_REAL_1" value="cat_SOCIAL"> <span class="cat-option-text" id="cat_SOCIAL">SOCIAL</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_REAL_dialog" style="display:none">
 		<div id="cat_REAL_description">A real object or event.</div>
 		<div id="cat_REAL_examples">woman, football, forest, aircraft, tiger, nurse, program</div>
+		<div id="cat_REAL_features">[]</div>
 	</div>
 	<div id="cat_INDIVIDUAL_dialog" style="display:none">
 		<div id="cat_INDIVIDUAL_description">An entity that occurs as a singular or is not compositional.</div>
 		<div id="cat_INDIVIDUAL_examples">woman, football, cake, aircraft, tiger</div>
+		<div id="cat_INDIVIDUAL_features">[]</div>
 	</div>
 	<div id="cat_IDEAL_dialog" style="display:none">
-		<div id="cat_IDEAL_description">An abstract entity that represents a desired state. For example, 'order' in 'law and
-			order' </div>
+		<div id="cat_IDEAL_description">An abstract entity that represents a desired state. For example, 'order' in 'law and order' </div>
 		<div id="cat_IDEAL_examples">law, justice, standard, peace, order</div>
+		<div id="cat_IDEAL_features">[]</div>
 	</div>
 	<div id="cat_PROPOSITIONAL_dialog" style="display:none">
 		<div id="cat_PROPOSITIONAL_description">A statement or an abstract component of speech- such as sentence</div>
 		<div id="cat_PROPOSITIONAL_examples">discourse, sentence</div>
+		<div id="cat_PROPOSITIONAL_features">[]</div>
 	</div>
 	<div id="cat_QUANTITY_dialog" style="display:none">
 		<div id="cat_QUANTITY_description">An entity that can be either measured, is numerical or is related to measurement</div>
 		<div id="cat_QUANTITY_examples">second, two, time, knowledge, metre</div>
+		<div id="cat_QUANTITY_features">[]</div>
 	</div>
 	<div id="cat_IRREAL_dialog" style="display:none">
 		<div id="cat_IRREAL_description">An entity that doesn't exist in the world/imaginary/mythological</div>
 		<div id="cat_IRREAL_examples">unicorn, centaur</div>
+		<div id="cat_IRREAL_features">[]</div>
 	</div>
 	<div id="cat_QUALITY_dialog" style="display:none">
 		<div id="cat_QUALITY_description">An entity relating to an observed quality such as kindness</div>
 		<div id="cat_QUALITY_examples">reliability, kindness, safety, airworthiness</div>
+		<div id="cat_QUALITY_features">[]</div>
 	</div>
 	<div id="cat_childset_PHYSICAL_0">
 		<strong>Select a sub-category under PHYSICAL:</strong><br>
 		<input type="radio" name="cat_radio_PHYSICAL_0" value="cat_STATIONARY"> <span class="cat-option-text" id="cat_STATIONARY">STATIONARY</span><br>
 		<input type="radio" name="cat_radio_PHYSICAL_0" value="cat_NONSTATIONARY"> <span class="cat-option-text" id="cat_NONSTATIONARY">NONSTATIONARY</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_childset_PHYSICAL_1">
 		<strong>Select a sub-category under PHYSICAL:</strong><br>
 		<input type="radio" name="cat_radio_PHYSICAL_1" value="cat_LIVING"> <span class="cat-option-text" id="cat_LIVING">LIVING</span><br>
 		<input type="radio" name="cat_radio_PHYSICAL_1" value="cat_NONLIVING"> <span class="cat-option-text" id="cat_NONLIVING">NONLIVING</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_PHYSICAL_dialog" style="display:none">
 		<div id="cat_PHYSICAL_description">A physical object</div>
 		<div id="cat_PHYSICAL_examples">rock, automobile, football, engine, bird, diamond, gasoline</div>
+		<div id="cat_PHYSICAL_features">[{"feature_name":"shape","example":"round","explain":"The general shape of an object (mostly geometrical shapes, but exceptions may exist)"},{"feature_name":"size","example":"house-sized","explain":"The size of an object (use vehicles or buildings for comparison (ex: elephant-\u003e big-\u003e truck sized)"},{"feature_name":"color","example":"red","explain":"The common color of an object"},{"feature_name":"material","example":"steel","explain":"The material property (steel, paper, fibers, biological tissue, etc)"},{"feature_name":"texture","example":"rough","explain":"The texture of an object (smooth, rough, etc)"},{"feature_name":"odor","example":"smelly","explain":"The common odor associated with object"},{"feature_name":"taste","example":"sweet","explain":"The common taste associated with object"},{"feature_name":"location","example":"Underwater","explain":"The common location of an object"},{"feature_name":"strength","example":"can lift a car","explain":"Strength of the object"},{"feature_name":"state","example":"plasma","explain":"The physical state of an object (gas, liquid, solid...)"}]</div>
 	</div>
 	<div id="cat_SENTIENT_dialog" style="display:none">
 		<div id="cat_SENTIENT_description">A human type with specific traits and goals.</div>
 		<div id="cat_SENTIENT_examples">woman, lawyer, secretary, clinic, Boeing, crowd, nurse</div>
+		<div id="cat_SENTIENT_features">[{"feature_name":"internal_trait","example":"calculative","explain":"The distinctive trait of a particular sentient. For example, lawyers are commonly quick-thinking, etc"},{"feature_name":"goal","example":"score goals (for football strikers)","explain":"The goal of a sentient. For example, lawyers have the goal to win cases for clients."}]</div>
 	</div>
 	<div id="cat_NATURAL_dialog" style="display:none">
 		<div id="cat_NATURAL_description">A naturally occuring entity (not created/developed by human)</div>
 		<div id="cat_NATURAL_examples">woman, rock, heat, gold, bird, summer, diamond</div>
+		<div id="cat_NATURAL_features">[]</div>
 	</div>
 	<div id="cat_SOCIAL_dialog" style="display:none">
 		<div id="cat_SOCIAL_description">An entity created by humans or arising from society.</div>
 		<div id="cat_SOCIAL_examples">laywer, secretary, clinic, marriage, engine, football</div>
+		<div id="cat_SOCIAL_features">[{"feature_name":"function","example":"open cans (for can-openers)","explain":"Either what an object is used for, or what a person/sentient does"},{"feature_name":"requirement","example":"batteries (for most electronic toys)","explain":"The prerequisites or required tools or objects to function"},{"feature_name":"processing","example":"","explain":"The manner in which a SOCIAL entity is processed/created/comes to be "}]</div>
 	</div>
 	<div id="cat_LIVING_dialog" style="display:none">
 		<div id="cat_LIVING_description">A biologically living entity.</div>
 		<div id="cat_LIVING_examples">tiger, amoeba, human, sunflower</div>
+		<div id="cat_LIVING_features">[{"feature_name":"propagation","example":"live births","explain":"The source of a living object- example mammals are mainly through \u0027live births\u0027"},{"feature_name":"habitat","example":"Forests","explain":"Where the living entity is commonly found"},{"feature_name":"physiology","example":"Covered in scales and posessing fins.","explain":"What the living entity is composed of/body form "},{"feature_name":"age","example":"","explain":"The age of a living entity"}]</div>
 	</div>
 	<div id="cat_NONLIVING_dialog" style="display:none">
 		<div id="cat_NONLIVING_description">A non-living entity.</div>
 		<div id="cat_NONLIVING_examples">rock, oil, river, acid, toolbox, report</div>
+		<div id="cat_NONLIVING_features">[{"feature_name":"Expiration date","example":"12/2/2019","explain":"Describes a previously determined date after which something should no longer be used."}]</div>
 	</div>
 	<div id="cat_STATIONARY_dialog" style="display:none">
-		<div id="cat_STATIONARY_description">Describes things that are normally immobile, attached to the earth and moved
-			only
-			at great effort.</div>
+		<div id="cat_STATIONARY_description">Describes things that are normally immobile, attached to the earth and moved only at great effort.</div>
 		<div id="cat_STATIONARY_examples">building, tree, mountain</div>
+		<div id="cat_STATIONARY_features">[{}]</div>
 	</div>
 	<div id="cat_childset_NONSTATIONARY_0">
 		<strong>Select a sub-category under NONSTATIONARY:</strong><br>
 		<input type="radio" name="cat_radio_NONSTATIONARY_0" value="cat_SELFMOVING"> <span class="cat-option-text" id="cat_SELFMOVING">SELFMOVING</span><br>
 		<input type="radio" name="cat_radio_NONSTATIONARY_0" value="cat_NONSELFMOVING"> <span class="cat-option-text" id="cat_NONSELFMOVING">NONSELFMOVING</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_NONSTATIONARY_dialog" style="display:none">
 		<div id="cat_NONSTATIONARY_description">Describes things that are able to move or be moved.</div>
 		<div id="cat_NONSTATIONARY_examples"></div>
+		<div id="cat_NONSTATIONARY_features">[{}]</div>
 	</div>
 	<div id="cat_SELFMOVING_dialog" style="display:none">
-		<div id="cat_SELFMOVING_description">Describes things that are normally in motion or designed for motion, in some
-			cases with no apparent initial source.</div>
+		<div id="cat_SELFMOVING_description">Describes things that are normally in motion or designed for motion, in some cases with no apparent initial source.</div>
 		<div id="cat_SELFMOVING_examples">dog, truck</div>
+		<div id="cat_SELFMOVING_features">[{"feature_name":"Energy source","example":"Food","explain":"Describes the source of energy which enables the object to move on its own."}]</div>
 	</div>
 	<div id="cat_NONSELFMOVING_dialog" style="display:none">
-		<div id="cat_NONSELFMOVING_description">Describes things that are normally immobile but can be moved with slight
-			effort.</div>
+		<div id="cat_NONSELFMOVING_description">Describes things that are normally immobile but can be moved with slight effort.</div>
 		<div id="cat_NONSELFMOVING_examples">brick, rock</div>
+		<div id="cat_NONSELFMOVING_features">[{"feature_name":"Cause of motion","example":"A ball is thrown","explain":"Describes the action(s) necessary for the object to be moved."}]</div>
 	</div>
 	<div id="cat_childset_COLLECTIVE_0">
 		<strong>Select a sub-category under COLLECTIVE:</strong><br>
 		<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_MASS"> <span class="cat-option-text" id="cat_MASS">MASS</span><br>
 		<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_SET"> <span class="cat-option-text" id="cat_SET">SET</span><br>
 		<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_STRUCTURE"> <span class="cat-option-text" id="cat_STRUCTURE">STRUCTURE</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_COLLECTIVE_dialog" style="display:none">
 		<div id="cat_COLLECTIVE_description">Describes a group of entities as a whole.</div>
 		<div id="cat_COLLECTIVE_examples">dog, truck</div>
+		<div id="cat_COLLECTIVE_features">[{"feature_name":"countability","example":"Countable","explain":"Explains if the collective entity is countable or not."}]</div>
 	</div>
 	<div id="cat_MASS_dialog" style="display:none">
-		<div id="cat_MASS_description">Even the smallest amount is of the same material nature as the collective term (a drop
-			of water is still water), and whose members are referred to only in terms of measurable units.</div>
+		<div id="cat_MASS_description">Even the smallest amount is of the same material nature as the collective term (a drop of water is still water), and whose members are referred to only in terms of measurable units.</div>
 		<div id="cat_MASS_examples">water, sand</div>
+		<div id="cat_MASS_features">[{"feature_name":"Smallest element name","example":"grain","explain":"Describes the object in terms of the smallest amount of it."}]</div>
 	</div>
 	<div id="cat_SET_dialog" style="display:none">
 		<div id="cat_SET_description">Each member of the set is the same kind as every other member.</div>
 		<div id="cat_SET_examples">herd</div>
+		<div id="cat_SET_features">[{}]</div>
 	</div>
 	<div id="cat_STRUCTURE_dialog" style="display:none">
-		<div id="cat_STRUCTURE_description">Each member is of the same kind type as every other member; members have
-			specified
-			relations with one another.</div>
+		<div id="cat_STRUCTURE_description">Each member is of the same kind type as every other member; members have specified relations with one another.</div>
 		<div id="cat_STRUCTURE_examples">company</div>
+		<div id="cat_STRUCTURE_features">[{"feature_name":"hierarchy","example":"management,staff","explain":"describes the roles inside the structure"},{"feature_name":"roles","example":"managers are in charge of managing staff","explain":"explains the duty and responsibility of the role"}]</div>
 	</div>
 	<div id="cat_childset_TEMPORAL_0">
 		<strong>Select a sub-category under TEMPORAL:</strong><br>
 		<input type="radio" name="cat_radio_TEMPORAL_0" value="cat_RELATIONAL"> <span class="cat-option-text" id="cat_RELATIONAL">RELATIONAL</span><br>
 		<input type="radio" name="cat_radio_TEMPORAL_0" value="cat_NONRELATIONAL"> <span class="cat-option-text" id="cat_NONRELATIONAL">NONRELATIONAL</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_TEMPORAL_dialog" style="display:none">
 		<div id="cat_TEMPORAL_description">There is a time aspect to the entity in question.</div>
 		<div id="cat_TEMPORAL_examples">party, hurricane, winter</div>
+		<div id="cat_TEMPORAL_features">[{}]</div>
 	</div>
 	<div id="cat_childset_RELATIONAL_0">
 		<strong>Select a sub-category under RELATIONAL:</strong><br>
 		<input type="radio" name="cat_radio_RELATIONAL_0" value="cat_EVENT"> <span class="cat-option-text" id="cat_EVENT">EVENT</span><br>
 		<input type="radio" name="cat_radio_RELATIONAL_0" value="cat_STATIVE"> <span class="cat-option-text" id="cat_STATIVE">STATIVE</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_childset_RELATIONAL_1">
 		<strong>Select a sub-category under RELATIONAL:</strong><br>
 		<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_MENTAL"> <span class="cat-option-text" id="cat_MENTAL">MENTAL</span><br>
 		<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_EMOTIONAL"> <span class="cat-option-text" id="cat_EMOTIONAL">EMOTIONAL</span><br>
 		<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_NONMENTAL"> <span class="cat-option-text" id="cat_NONMENTAL">NONMENTAL</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_RELATIONAL_dialog" style="display:none">
 		<div id="cat_RELATIONAL_description">Verbs are attached here.</div>
 		<div id="cat_RELATIONAL_examples"></div>
+		<div id="cat_RELATIONAL_features">[{"feature_name":"time","example":"2100 hours","explain":"describes when it happened."},{"feature_name":"cause","example":"The man fell down because he tripped on a rock","explain":"describes the cause of the event"},{"feature_name":"enablement","example":"The forest fires were caused by dense underbrush","explain":"describes what allowed an event to happen"},{"feature_name":"consequence","example":"Thus 1600 people perished in the fires","explain":"describes the consequences of the event"},{"feature_name":"sequel","example":"Subsequently more efforts were channeled into raising awareness for forest fires","explain":"describes subsequent events following the inital event"}]</div>
 	</div>
 	<div id="cat_NONRELATIONAL_dialog" style="display:none">
 		<div id="cat_NONRELATIONAL_description">Temporal nouns (nouns that relate to time i.e, seasons) go here.</div>
 		<div id="cat_NONRELATIONAL_examples">winter, afternoon</div>
+		<div id="cat_NONRELATIONAL_features">[{}]</div>
 	</div>
 	<div id="cat_STATIVE_dialog" style="display:none">
 		<div id="cat_STATIVE_description">Details verbs that often describe states that last for some time.</div>
 		<div id="cat_STATIVE_examples">disagree, like, depend</div>
+		<div id="cat_STATIVE_features">[]</div>
 	</div>
 	<div id="cat_MENTAL_dialog" style="display:none">
-		<div id="cat_MENTAL_description">Mental Verbs refer to cognitive (that deals with logic) state in which actions are
-			mostly abstract.</div>
+		<div id="cat_MENTAL_description">Mental Verbs refer to cognitive (that deals with logic) state in which actions are mostly abstract.</div>
 		<div id="cat_MENTAL_examples">announce, schedule, prefer</div>
+		<div id="cat_MENTAL_features">[]</div>
 	</div>
 	<div id="cat_EMOTIONAL_dialog" style="display:none">
 		<div id="cat_EMOTIONAL_description">Describes verbs of emotional reaction:</div>
 		<div id="cat_EMOTIONAL_examples">astonish, suprise</div>
+		<div id="cat_EMOTIONAL_features">[]</div>
 	</div>
 	<div id="cat_NONMENTAL_dialog" style="display:none">
 		<div id="cat_NONMENTAL_description">Verbs that describe an action go here</div>
 		<div id="cat_NONMENTAL_examples">run, jump, dance</div>
+		<div id="cat_NONMENTAL_features">[]</div>
 	</div>
 	<div id="cat_childset_EVENT_0">
 		<strong>Select a sub-category under EVENT:</strong><br>
 		<input type="radio" name="cat_radio_EVENT_0" value="cat_GOAL"> <span class="cat-option-text" id="cat_GOAL">GOAL</span><br>
 		<input type="radio" name="cat_radio_EVENT_0" value="cat_NONGOAL"> <span class="cat-option-text" id="cat_NONGOAL">NONGOAL</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_childset_EVENT_1">
 		<strong>Select a sub-category under EVENT:</strong><br>
 		<input type="radio" name="cat_radio_EVENT_1" value="cat_ACTIVITY"> <span class="cat-option-text" id="cat_ACTIVITY">ACTIVITY</span><br>
 		<input type="radio" name="cat_radio_EVENT_1" value="cat_ACCOMPLISHMENT"> <span class="cat-option-text" id="cat_ACCOMPLISHMENT">ACCOMPLISHMENT</span><br>
 		<input type="radio" name="cat_radio_EVENT_1" value="cat_ACHIEVEMENT"> <span class="cat-option-text" id="cat_ACHIEVEMENT">ACHIEVEMENT</span><br>
-		<br>
+	<br>
 	</div>
 	<div id="cat_EVENT_dialog" style="display:none">
 		<div id="cat_EVENT_description">A thing that happens or takes place, especially one of importance.</div>
 		<div id="cat_EVENT_examples">party, graduation, earthquake</div>
+		<div id="cat_EVENT_features">[{"feature_name":"manner","example":"It happened in a slow and uneventful manner","explain":"describes how the event unfolded."}]</div>
 	</div>
 	<div id="cat_GOAL_dialog" style="display:none">
 		<div id="cat_GOAL_description">Describes goal-oriented events.</div>
 		<div id="cat_GOAL_examples">purchase, study</div>
+		<div id="cat_GOAL_features">[{"feature_name":"purpose","example":"The objective of studying is to get good grades","explain":"describes the objectives of goal-oriented actions."}]</div>
 	</div>
 	<div id="cat_NONGOAL_dialog" style="display:none">
-		<div id="cat_NONGOAL_description">Describes events that occur either spontaneously or unintentionally, like an
-			accident.</div>
+		<div id="cat_NONGOAL_description">Describes events that occur either spontaneously or unintentionally, like an accident.</div>
 		<div id="cat_NONGOAL_examples">accident, volcano eruption</div>
+		<div id="cat_NONGOAL_features">[]</div>
 	</div>
 	<div id="cat_ACTIVITY_dialog" style="display:none">
-		<div id="cat_ACTIVITY_description">ACTIVITY detail a process that does not entail a change of state (when going on a
-			run you are running throughout the session) and can either end or culminate in an achievement or accomplishment.</div>
+		<div id="cat_ACTIVITY_description">ACTIVITY detail a process that does not entail a change of state (when going on a run you are running throughout the session) and can either end or culminate in an achievement or accomplishment.</div>
 		<div id="cat_ACTIVITY_examples">think, run</div>
+		<div id="cat_ACTIVITY_features">[]</div>
 	</div>
 	<div id="cat_ACCOMPLISHMENT_dialog" style="display:none">
-		<div id="cat_ACCOMPLISHMENT_description">Accomplishments involve a change of state, often with a process involved
-			(John drove to the store in an hour).</div>
+		<div id="cat_ACCOMPLISHMENT_description">Accomplishments involve a change of state, often with a process involved (John drove to the store in an hour).</div>
 		<div id="cat_ACCOMPLISHMENT_examples">John built a house, John finished building the house.</div>
+		<div id="cat_ACCOMPLISHMENT_features">[]</div>
 	</div>
 	<div id="cat_ACHIEVEMENT_dialog" style="display:none">
-		<div id="cat_ACHIEVEMENT_description">Details the change of state that took place but omits the process which caused
-			the change of state.</div>
+		<div id="cat_ACHIEVEMENT_description">Details the change of state that took place but omits the process which caused the change of state.</div>
 		<div id="cat_ACHIEVEMENT_examples">John reached the summit in an hour., Tom won the game</div>
+		<div id="cat_ACHIEVEMENT_features">[]</div>
+	</div>
+
+	<div id="kt_halfway" style="display:none">
+		<h4>Is this instance belong to following type?</h4>
+		<div>
+			<strong>Type: <span id="h_kt_name"></span></strong><br>
+			<span id="h_kt_desc"></span><br>
+			<input type="radio" name="h_kt_radio" value="yes"> Yes<br>
+			<input type="radio" name="h_kt_radio" value="no"> No<br>
+			<br>
+		</div>
 	</div>
 
 	<div id="kt_selection" style="display:none">
@@ -323,7 +357,7 @@
 		const root = "ENTITY";
 		var stage = 0; // 0 - Welcome page; 1 - Select categories; 2 - Select kindtype; 3 - Submit data and end.
 		const theInstance = setInstance();
-		var selectedCategories = [];
+		var selectedCategories = []; // names only
 
 		// ***************************************************************************************
 		// Define Functions
@@ -379,6 +413,31 @@
 			$("div[id^='cat_childset_" + root + "_']").show();
 		}
 
+		function stage_1_1(ktName) {
+			$("#stage_1_head").hide();
+			let $showlist = $("div[id^='cat_childset_']:visible");
+			$showlist.hide();
+
+			let kt = getKtByName(ktName);
+			$("#h_kt_name").text(ktName);
+			$("#h_kt_desc").text(kt.description);
+			$("#kt_halfway").show();
+
+			$("input[name='h_kt_radio']").on("click", function (e) {
+				if ($(this).is(':checked')) {
+					let v = $(this).val();
+					if (v === "yes") {
+						$("#kt_halfway").hide();
+						stage_2(ktName);
+					} else {
+						$("#kt_halfway").hide();
+						$("#stage_1_head").show();
+						$showlist.show();
+					}
+				}
+			});
+		}
+
 		function stage_2(ktName) {
 			// get root kt
 			let rootkt = getKtByName(ktName);
@@ -431,7 +490,18 @@
 		}
 
 		function stage_3() {
-			// Do some verification if any
+			// get all features of selected categories
+			for(let i=0; i<selectedCategories.length; i++) {
+				let query = "#cat_"+selectedCategories[i]+"_features";
+				let objstr = $(query).text();
+				console.log("features for : "+query+"; before parse : "+objstr);
+				let features = JSON.parse(objstr);
+				console.log(features);
+			}
+
+			// get all features of parents plus selected kindtypes
+
+			// generate feature filling form
 
 			$("#instance_head").hide();
 			$("#stage_2_head").hide();
@@ -508,13 +578,17 @@
 						$("div[id^='cat_childset_" + c + "_']").show();
 						// check if current categories match any kindtype
 						let kt = isTerminal();
+						let shown = $("div[id^='cat_childset_']:visible").length;
 						if (kt !== null) {
 							// enter stage 2 for kindtypes
 							$("#debug_area").html("selectedCategories = " + JSON.stringify(selectedCategories.sort()) + "<br>kindtype = " + kt);
-							stage_2(kt);
+							if (shown === 0) {
+								stage_2(kt);
+							} else {
+								// This the the case where there are still more categories but already matched a kindtype e.g. 'PART'
+								stage_1_1(kt);
+							}
 						} else {
-							// TODO: check if there is no more category to select. then should ask user to enter a type and go stage 3
-							let shown = $("div[id^='cat_childset_']:visible").length;
 							$("#debug_area").html("selectedCategories = " + JSON.stringify(selectedCategories.sort()) + "<br>shown=" + shown);
 							if (shown === 0) {
 								stage_2_1();

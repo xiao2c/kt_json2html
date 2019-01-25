@@ -7,4 +7,8 @@
 <br>
 </div>
 </#list>
-<div id="cat_${obj.name}_dialog" style="display:none"><div id="cat_${obj.name}_description">${dialog_description}</div><div id="cat_${obj.name}_examples">${dialog_examples}</div></div>
+<div id="cat_${obj.name}_dialog" style="display:none">
+	<div id="cat_${obj.name}_description">${dialog_description}</div>
+	<div id="cat_${obj.name}_examples">${dialog_examples}</div>
+	<div id="cat_${obj.name}_features">${json_features}</div>
+</div>

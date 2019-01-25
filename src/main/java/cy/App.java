@@ -1,6 +1,5 @@
 package cy;
 
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -19,12 +18,9 @@ import com.google.gson.JsonParser;
 import cy.model.Category;
 import cy.model.Instance;
 import cy.model.KindType;
-import freemarker.core.ParseException;
 import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.TemplateNotFoundException;
 import freemarker.template.Version;
 
 public final class App {
@@ -51,14 +47,17 @@ public final class App {
 		Template template = cfg.getTemplate("category.ftl");
 		Writer consoleWriter = new OutputStreamWriter(System.out);
 
+		Gson gson = new Gson();
 		for (Category cat : CategoryList) {
 			// Get information for dialog
 			String examples = String.join(", ", cat.getExampleInstances());
+			String features = gson.toJson(cat.getFeatureTypes());
 
 			Map<String, Object> input = new HashMap<String, Object>();
 			input.put("obj", cat);
 			input.put("dialog_description", cat.getDescription());
 			input.put("dialog_examples", examples);
+			input.put("json_features", features);
 
 			template.process(input, consoleWriter);
 
