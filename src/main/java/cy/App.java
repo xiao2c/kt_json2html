@@ -71,6 +71,7 @@ public final class App {
 		}
 
 		System.out.println("\n\n==== CY APP End ====\n");
+		System.out.println("ktjson:\n" + gson.toJson(KindTypeList));
 	}
 
 	static void loadDataFile() throws Exception {
