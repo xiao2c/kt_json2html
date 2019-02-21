@@ -13,6 +13,19 @@
 		cursor: pointer;
 		text-decoration: underline;
 		color: blue;
+		font-size: 0.8rem;
+	}
+	.card-header {
+		padding: .2rem .7rem;
+	}
+	.card-body {
+		font-size: 0.8rem;
+	}
+	.card-footer {
+		padding: .2rem .7rem;
+	}
+	#last_box {
+		text-align:center;
 	}
 </style>
 
@@ -23,9 +36,9 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-header">
-						<a data-toggle="collapse" data-target="#demo">header ...</a>
+						header ... <a href="#" data-toggle="collapse" data-target="#card1" style="font-size:0.6rem;font-weight:bold">Collapse/Expand</a>
 					</div>
-					<div id="demo" class="collapse show">
+					<div id="card1" class="collapse show">
 						<div class="card-body">
 							content ...
 						</div>
@@ -59,22 +72,18 @@
 						<input type="hidden" name="SelectedInstance" value="">
 
 						<div id="welcome_page" style="display:none">
-							<h4>Instructions</h4>
+							<h5>Instructions</h5>
 							<p>... instructions ...</p>
-							<p><a href="#" onclick="stage_1()">Start</a></p>
+							<p><a href="#" onclick="stage_1()" class="btn btn-info">Start</a></p>
 						</div>
 						<div id="instance_head" style="display:none">
-							<h3>Instance: <span id="the_instance"></span></h3>
-						</div>
-						<div id="selected_cat_display" style="color: gray; font-style: italic">
+							<h4>Instance: <span id="the_instance"></span></h4>
 						</div>
 						<div id="stage_1_head" style="display:none">
-							<h4>Please select correct category for this instance.<br>(You can click on the category name
-								for more
-								information)</h4>
+							<h5>Please select correct category for this instance. (You can click on the category name for more information)</h5><br>
 						</div>
 						<div id="stage_2_head" style="display:none">
-							<h4>Please select the most appropriate type for this instance.</h4>
+							<h5>Please select the most appropriate type for this instance.</h5><br>
 						</div>
 
 						<!-- Start java generated html -->
@@ -82,13 +91,13 @@
 							<strong>Select a sub-category under ENTITY:</strong><br>
 							<input type="radio" name="cat_radio_ENTITY_0" value="cat_ABSTRACT"> <span class="cat-option-text" id="cat_ABSTRACT">ABSTRACT</span><br>
 							<input type="radio" name="cat_radio_ENTITY_0" value="cat_REAL"> <span class="cat-option-text" id="cat_REAL">REAL</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_childset_ENTITY_1">
 							<strong>Select a sub-category under ENTITY:</strong><br>
 							<input type="radio" name="cat_radio_ENTITY_1" value="cat_INDIVIDUAL"> <span class="cat-option-text" id="cat_INDIVIDUAL">INDIVIDUAL</span><br>
 							<input type="radio" name="cat_radio_ENTITY_1" value="cat_COLLECTIVE"> <span class="cat-option-text" id="cat_COLLECTIVE">COLLECTIVE</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_ENTITY_dialog" style="display:none">
 							<div id="cat_ENTITY_description">The root node</div>
@@ -102,7 +111,7 @@
 							<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_QUANTITY"> <span class="cat-option-text" id="cat_QUANTITY">QUANTITY</span><br>
 							<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_IRREAL"> <span class="cat-option-text" id="cat_IRREAL">IRREAL</span><br>
 							<input type="radio" name="cat_radio_ABSTRACT_0" value="cat_QUALITY"> <span class="cat-option-text" id="cat_QUALITY">QUALITY</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_ABSTRACT_dialog" style="display:none">
 							<div id="cat_ABSTRACT_description">Something that doesn't exist physically, nor is an event</div>
@@ -114,13 +123,13 @@
 							<input type="radio" name="cat_radio_REAL_0" value="cat_PHYSICAL"> <span class="cat-option-text" id="cat_PHYSICAL">PHYSICAL</span><br>
 							<input type="radio" name="cat_radio_REAL_0" value="cat_TEMPORAL"> <span class="cat-option-text" id="cat_TEMPORAL">TEMPORAL</span><br>
 							<input type="radio" name="cat_radio_REAL_0" value="cat_SENTIENT"> <span class="cat-option-text" id="cat_SENTIENT">SENTIENT</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_childset_REAL_1">
 							<strong>Select a sub-category under REAL:</strong> (<a href="#" onClick="backTo('REAL')">Deselect REAL</a>)<br>
 							<input type="radio" name="cat_radio_REAL_1" value="cat_NATURAL"> <span class="cat-option-text" id="cat_NATURAL">NATURAL</span><br>
 							<input type="radio" name="cat_radio_REAL_1" value="cat_SOCIAL"> <span class="cat-option-text" id="cat_SOCIAL">SOCIAL</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_REAL_dialog" style="display:none">
 							<div id="cat_REAL_description">A real object or event.</div>
@@ -161,13 +170,13 @@
 							<strong>Select a sub-category under PHYSICAL:</strong> (<a href="#" onClick="backTo('PHYSICAL')">Deselect PHYSICAL</a>)<br>
 							<input type="radio" name="cat_radio_PHYSICAL_0" value="cat_STATIONARY"> <span class="cat-option-text" id="cat_STATIONARY">STATIONARY</span><br>
 							<input type="radio" name="cat_radio_PHYSICAL_0" value="cat_NONSTATIONARY"> <span class="cat-option-text" id="cat_NONSTATIONARY">NONSTATIONARY</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_childset_PHYSICAL_1">
 							<strong>Select a sub-category under PHYSICAL:</strong> (<a href="#" onClick="backTo('PHYSICAL')">Deselect PHYSICAL</a>)<br>
 							<input type="radio" name="cat_radio_PHYSICAL_1" value="cat_LIVING"> <span class="cat-option-text" id="cat_LIVING">LIVING</span><br>
 							<input type="radio" name="cat_radio_PHYSICAL_1" value="cat_NONLIVING"> <span class="cat-option-text" id="cat_NONLIVING">NONLIVING</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_PHYSICAL_dialog" style="display:none">
 							<div id="cat_PHYSICAL_description">A physical object</div>
@@ -208,7 +217,7 @@
 							<strong>Select a sub-category under NONSTATIONARY:</strong> (<a href="#" onClick="backTo('NONSTATIONARY')">Deselect NONSTATIONARY</a>)<br>
 							<input type="radio" name="cat_radio_NONSTATIONARY_0" value="cat_SELFMOVING"> <span class="cat-option-text" id="cat_SELFMOVING">SELFMOVING</span><br>
 							<input type="radio" name="cat_radio_NONSTATIONARY_0" value="cat_NONSELFMOVING"> <span class="cat-option-text" id="cat_NONSELFMOVING">NONSELFMOVING</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_NONSTATIONARY_dialog" style="display:none">
 							<div id="cat_NONSTATIONARY_description">Describes things that are able to move or be moved.</div>
@@ -230,7 +239,7 @@
 							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_MASS"> <span class="cat-option-text" id="cat_MASS">MASS</span><br>
 							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_SET"> <span class="cat-option-text" id="cat_SET">SET</span><br>
 							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_STRUCTURE"> <span class="cat-option-text" id="cat_STRUCTURE">STRUCTURE</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_COLLECTIVE_dialog" style="display:none">
 							<div id="cat_COLLECTIVE_description">Describes a group of entities as a whole.</div>
@@ -256,7 +265,7 @@
 							<strong>Select a sub-category under TEMPORAL:</strong> (<a href="#" onClick="backTo('TEMPORAL')">Deselect TEMPORAL</a>)<br>
 							<input type="radio" name="cat_radio_TEMPORAL_0" value="cat_RELATIONAL"> <span class="cat-option-text" id="cat_RELATIONAL">RELATIONAL</span><br>
 							<input type="radio" name="cat_radio_TEMPORAL_0" value="cat_NONRELATIONAL"> <span class="cat-option-text" id="cat_NONRELATIONAL">NONRELATIONAL</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_TEMPORAL_dialog" style="display:none">
 							<div id="cat_TEMPORAL_description">There is a time aspect to the entity in question.</div>
@@ -267,14 +276,14 @@
 							<strong>Select a sub-category under RELATIONAL:</strong> (<a href="#" onClick="backTo('RELATIONAL')">Deselect RELATIONAL</a>)<br>
 							<input type="radio" name="cat_radio_RELATIONAL_0" value="cat_EVENT"> <span class="cat-option-text" id="cat_EVENT">EVENT</span><br>
 							<input type="radio" name="cat_radio_RELATIONAL_0" value="cat_STATIVE"> <span class="cat-option-text" id="cat_STATIVE">STATIVE</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_childset_RELATIONAL_1">
 							<strong>Select a sub-category under RELATIONAL:</strong> (<a href="#" onClick="backTo('RELATIONAL')">Deselect RELATIONAL</a>)<br>
 							<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_MENTAL"> <span class="cat-option-text" id="cat_MENTAL">MENTAL</span><br>
 							<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_EMOTIONAL"> <span class="cat-option-text" id="cat_EMOTIONAL">EMOTIONAL</span><br>
 							<input type="radio" name="cat_radio_RELATIONAL_1" value="cat_NONMENTAL"> <span class="cat-option-text" id="cat_NONMENTAL">NONMENTAL</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_RELATIONAL_dialog" style="display:none">
 							<div id="cat_RELATIONAL_description">Verbs are attached here.</div>
@@ -310,14 +319,14 @@
 							<strong>Select a sub-category under EVENT:</strong> (<a href="#" onClick="backTo('EVENT')">Deselect EVENT</a>)<br>
 							<input type="radio" name="cat_radio_EVENT_0" value="cat_GOAL"> <span class="cat-option-text" id="cat_GOAL">GOAL</span><br>
 							<input type="radio" name="cat_radio_EVENT_0" value="cat_NONGOAL"> <span class="cat-option-text" id="cat_NONGOAL">NONGOAL</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_childset_EVENT_1">
 							<strong>Select a sub-category under EVENT:</strong> (<a href="#" onClick="backTo('EVENT')">Deselect EVENT</a>)<br>
 							<input type="radio" name="cat_radio_EVENT_1" value="cat_ACTIVITY"> <span class="cat-option-text" id="cat_ACTIVITY">ACTIVITY</span><br>
 							<input type="radio" name="cat_radio_EVENT_1" value="cat_ACCOMPLISHMENT"> <span class="cat-option-text" id="cat_ACCOMPLISHMENT">ACCOMPLISHMENT</span><br>
 							<input type="radio" name="cat_radio_EVENT_1" value="cat_ACHIEVEMENT"> <span class="cat-option-text" id="cat_ACHIEVEMENT">ACHIEVEMENT</span><br>
-							<br><br>
+							<br>
 						</div>
 						<div id="cat_EVENT_dialog" style="display:none">
 							<div id="cat_EVENT_description">A thing that happens or takes place, especially one of importance.</div>
@@ -352,7 +361,7 @@
 						<!-- End java generated html -->
 
 						<div id="kt_halfway" style="display:none">
-							<h4>Is this instance belong to following type?</h4>
+							<h5>Is this instance belong to following type?</h5><br>
 							<div>
 								<strong>Type: <span id="h_kt_name"></span></strong><br>
 								<span id="h_kt_desc"></span><br>
@@ -383,14 +392,14 @@
 								</tbody>
 							</table>
 							<input type="radio" name="radio_ktname" value="NOMATCH"> None of the above type.
-							<p><a href="#" id="button1_to_stage3">Next</a></p>
+							<p><br><a href="#" id="button1_to_stage3" class="btn btn-info">Next</a></p>
 						</div>
 
 						<div id="kt_suggest" style="display:none">
-							<h4>Please suggest a new kindtype for this instance (e.g. xyz)</h4>
+							<h5>Please suggest a new kindtype for this instance (e.g. xyz)</h5><br>
 							Name of the new Kindtype: <input type="text" name="suggested_kt" />
 							<div id="parent_kt_question" style="display:none">
-								<h4>Which is the parent type of your newly suggested type?</h4>
+								<h5>Which is the parent type of your newly suggested type?</h5><br>
 								<table id="parent_kt_table">
 									<caption>
 										<a href="#"
@@ -414,15 +423,17 @@
 								suitable as a parent
 								type.
 							</div>
-							<p><a href="#" id="button2_to_stage3">Next</a></p>
+							<p><br><a href="#" id="button2_to_stage3" class="btn btn-info">Next</a></p>
 						</div>
 
 						<div id="feature_filling" style="display:none">
 							<div id="feature_list_area"></div>
-							<p><a href="#" id="button3_to_stage4">Next</a></p>
+							<p><br><a href="#" id="button3_to_stage4" class="btn btn-info">Next</a></p>
 						</div>
 
 					</div> <!-- card body end -->
+
+					<div id="selected_cat_display" class="card-footer">&nbsp;</div>
 				</div> <!-- card end -->
 			</div> <!-- col end -->
 		</div> <!-- row end -->
@@ -430,7 +441,7 @@
 	</div> <!-- container end -->
 
 	<!-- outside container because last step will hide all div -->
-	<table id="feedback" style="width:100%" class="p-3">
+	<table id="feedback" style="width:98%;margin:1em" class="p-3">
 		<tr><td>
 		Feedback:
 		<textarea name="feedback_content" style="width:100%" rows="4"></textarea>
@@ -438,7 +449,7 @@
 	</table>
 
 	<div id="last_box" style="display:none">
-		<h3>Thanks you for your help!<br>You can click submit button to complete this task now.</h3>
+		<h4>Thank you for your help!<br>Now you can click submit button to complete this task.</h4>
 		<crowd-button form-action="submit" variant="primary">Submit</crowd-button>
 	</div>
 
@@ -633,13 +644,37 @@
 			} else {
 				kt = $("input[name='radio_ktname']:checked").val();
 			}
-			let str = '<h4>Please Add Features for "' + kt + '"</h4>e.g. ......<br>';
+			let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
+			str += '<div id="general_def_' + kt + '"></div>';
+			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
+			$("#feature_list_area").append(str);
+			addFeatureValue('general_def_' + kt);
+			addFeatureValue('general_def_' + kt);
+
+			str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
+			str += '<div id="helpful_attr_' + kt + '"></div>';
+			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
+			$("#feature_list_area").append(str);
+			addFeatureValue('helpful_attr_' + kt);
+			addFeatureValue('helpful_attr_' + kt);
+			addFeatureValue('helpful_attr_' + kt);
+			addFeatureValue('helpful_attr_' + kt);
+
+			str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
+			str += '<div id="characteristics_' + kt + '"></div>';
+			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
+			$("#feature_list_area").append(str);
+			addFeatureValue('characteristics_' + kt);
+			addFeatureValue('characteristics_' + kt);
+			addFeatureValue('characteristics_' + kt);
+			addFeatureValue('characteristics_' + kt);
+
+			str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5>e.g. ......<br>';
 			str += '<div id="ifeature_' + kt + '"></div>';
-			str += '<a href="#" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
+			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
 			$("#feature_list_area").append(str);
 			addFeatureValue('ifeature_' + kt);
 			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
 
 			$("#button3_to_stage4").on("click", function (e) {
 				$("#instance_head").hide();
@@ -651,83 +686,6 @@
 			$("#kt_selection").hide();
 			$("#kt_suggest").hide();
 			$("#feature_filling").show();
-		}
-
-		// Not used: For 1st version do not show category features to complicate the task.
-		function stage_3b(case_value) {
-			let cat_feature_list = []; // e.g. [{"catname":"PHYSICAL", "features":[...]}, {"catname":"XYZ", "features":[...]}]
-			// get all features of selected categories
-			for (let i = 0; i < selectedCategories.length; i++) {
-				let query = "#cat_" + selectedCategories[i] + "_features";
-				let objstr = $(query).text();
-				//console.log("features for : "+query+"; before parse : "+objstr);
-				let features = JSON.parse(objstr);
-				//console.log(features);
-				cat_feature_list.push({ "catname": selectedCategories[i], "features": features });
-			}
-
-			// get all features of parents plus selected kindtypes
-			let kt_feature_list = []; // e.g. [{"ktname":"ABC", "features":[...]}, {"ktname":"EFG", "features":[...]}]
-			switch (case_value) {
-				case 1: // get feature of selected kt and parents
-					let ktname = $("input[name='radio_ktname']:checked").val();
-					let kt = getKtFromSubTree(ktname);
-					let parents = getParentKTs(kt.parentname);
-					kt_feature_list.push({ "ktname": ktname, "features": kt.feature_types });
-					for (let i = 0; i < parents.length; i++) {
-						kt_feature_list.push({ "ktname": parents[i].name, "features": parents[i].feature_types });
-					}
-					break;
-				case 2: // get feature of parents
-					let parentname = $("input[name='radio_parent_ktname']:checked").val();
-					if (parentname !== "NONE") {
-						let parents2 = getParentKTs(parentname);
-						for (let i = 0; i < parents2.length; i++) {
-							kt_feature_list.push({ "ktname": parents2[i].name, "features": parents2[i].feature_types });
-						}
-					}
-					break;
-				case 3: // no feature
-					break;
-			}
-
-			// generate feature filling form
-			for (let i = 0; i < cat_feature_list.length; i++) {
-				let cat = cat_feature_list[i].catname;
-				let f = cat_feature_list[i].features;
-				for (let j = 0; j < f.length; j++) {
-					// console.log("f[j]= " + JSON.stringify(f[j]));
-					if (f[j].feature_name) {
-						let str = "<h4>Feature: " + f[j].feature_name + "<br>Explain: " + f[j].explain + "<br>Sample Value: " + f[j].example + "</h4>";
-						str += 'Enter suitable value(s) for this instance:<br><div id="catfeature_' + cat + '_' + f[j].feature_name + '"></div>';
-						str += '<a href="#" onclick="addFeatureValue(\'catfeature_' + cat + '_' + f[j].feature_name + '\')">Add</a><br>';
-						$("#feature_list_area").append(str);
-					}
-				}
-			}
-
-			for (let i = 0; i < kt_feature_list.length; i++) {
-				let kt = kt_feature_list[i].ktname;
-				let f = kt_feature_list[i].features;
-				for (let j = 0; j < f.length; j++) {
-					let str = "<h4>Feature: " + f[j].feature_name + "</h4>Explain: " + f[j].explain + "<br>Sample Value: " + f[j].example + "<br>";
-					str += 'Enter suitable value(s) for current instance:<br><div id="ktfeature_' + kt + '_' + f[j].feature_name + '"></div>';
-					str += '<a href="#" onclick="addFeatureValue(\'ktfeature_' + kt + '_' + f[j].feature_name + '\')">Add</a><br>';
-					$("#feature_list_area").append(str);
-				}
-			}
-
-			$("#button3_to_stage4").on("click", function (e) {
-				$("#instance_head").hide();
-				$("#feature_filling").hide();
-				stage_4("");
-			});
-
-			$("#stage_2_head").hide();
-			$("#kt_selection").hide();
-			$("#kt_suggest").hide();
-			$("#feature_filling").show();
-
 		}
 
 		function stage_4(v) {
@@ -805,7 +763,13 @@
 		}
 
 		function updateSelectedDisplay() {
-			$("#selected_cat_display").html("Selected Categories: " + selectedCategories.sort().join(", "));
+			// <span class="badge badge-pill badge-light">
+			let badges = "";
+			selectedCategories = selectedCategories.sort();
+			for(let i=0; i<selectedCategories.length; i++) {
+				badges += '<span class="badge badge-pill badge-secondary">' + selectedCategories[i] + '</span> ';
+			}
+			$("#selected_cat_display").html("Selected Categories: " + badges);
 		}
 
 		// ***************************************************************************************
@@ -871,6 +835,7 @@
 							// enter stage 2 for kindtypes
 							updateSelectedDisplay();
 							if (allselected) {
+								$("div[id^='cat_childset_']:visible").hide();
 								stage_2(kt);
 							} else {
 								// This the the case where there are still more categories but already matched a kindtype e.g. 'PART'
