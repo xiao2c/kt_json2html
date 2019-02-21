@@ -1,9 +1,9 @@
 <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-treetable/3.2.0/css/jquery.treetable.theme.default.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-treetable@3.2.0-1/jquery.treetable.min.js"></script>
@@ -387,8 +387,8 @@
 						</div>
 
 						<div id="kt_suggest" style="display:none">
-							<h4>What type should this instance belongs to? (e.g. xyz)</h4>
-							<input type="text" name="suggested_kt" />
+							<h4>Please suggest a new kindtype for this instance (e.g. xyz)</h4>
+							Name of the new Kindtype: <input type="text" name="suggested_kt" />
 							<div id="parent_kt_question" style="display:none">
 								<h4>Which is the parent type of your newly suggested type?</h4>
 								<table id="parent_kt_table">
@@ -862,10 +862,15 @@
 						// check if current categories match any kindtype
 						let kt = isTerminal();
 						let shown = $("div[id^='cat_childset_']:visible").length;
+						let allselected = false; // does all leaf childsets selected by user?
+						if (shown === $("input[name^='cat_radio_']:visible:checked").length) {
+							allselected = true;
+						}
+
 						if (kt !== null) {
 							// enter stage 2 for kindtypes
 							updateSelectedDisplay();
-							if (shown === 0) {
+							if (allselected) {
 								stage_2(kt);
 							} else {
 								// This the the case where there are still more categories but already matched a kindtype e.g. 'PART'
@@ -873,7 +878,8 @@
 							}
 						} else {
 							updateSelectedDisplay();
-							if (shown === 0) {
+							if (allselected) {
+								$("div[id^='cat_childset_']:visible").hide();
 								stage_2_1(false);
 							}
 						}
