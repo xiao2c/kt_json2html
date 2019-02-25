@@ -443,15 +443,18 @@
 	</div> <!-- container end -->
 
 	<!-- outside container because last step will hide all div -->
-	<table id="feedback" style="width:98%;margin:1em" class="p-3">
-		<tr><td>
-		Feedback:
-		<textarea name="feedback_content" style="width:100%" rows="4"></textarea>
-		</td></tr>
-	</table>
-
 	<div id="last_box" style="display:none">
-		<h4>Thank you for your help!<br>Now you can click submit button to complete this task.</h4>
+		<h3>Thank you for your help!<br>You can now click submit to complete the task.</h3>
+		<table id="feedback" style="width:100%" class="p-3">
+			<tr>
+				<td>
+					Feedback:
+					<textarea name="feedback_content" style="width:100%" rows="4"></textarea>
+				</td>
+			</tr>
+			<p>Do you have any feedback or comments that would help improve our task. Feel free to write it here, we will do
+				our best to take into consideration. </p>
+		</table>
 		<crowd-button form-action="submit" variant="primary">Submit</crowd-button>
 	</div>
 
