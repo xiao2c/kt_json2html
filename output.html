@@ -82,10 +82,14 @@
 							<h4>Instance: <span id="the_instance"></span></h4>
 						</div>
 						<div id="stage_1_head" style="display:none">
-							<h5>Please select correct category for this instance. (You can click on the category name for more information)</h5><br>
+							<h5>Please select correct category for this instance. (You can click on the category name for more information)</h5>
+							<a href="#" onClick="toggleInstruction('instruction_1')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_1" style="display:none"> ...instruction contents... </div><br>
 						</div>
 						<div id="stage_2_head" style="display:none">
-							<h5>Please select the most appropriate type for this instance.</h5><br>
+							<h5>Please select the most appropriate type for this instance.</h5>
+							<a href="#" onClick="toggleInstruction('instruction_2')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_2" style="display:none"> ...instruction contents... </div><br>
 						</div>
 
 						<!-- Start java generated html -->
@@ -363,7 +367,9 @@
 						<!-- End java generated html -->
 
 						<div id="kt_halfway" style="display:none">
-							<h5>Is this instance belong to following type?</h5><br>
+							<h5>Is this instance belong to following type?</h5>
+							<a href="#" onClick="toggleInstruction('instruction_type')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_type" style="display:none"> ...instruction contents... </div><br>
 							<div>
 								<strong>Type: <span id="h_kt_name"></span></strong><br>
 								<span id="h_kt_desc"></span><br>
@@ -398,10 +404,14 @@
 						</div>
 
 						<div id="kt_suggest" style="display:none">
-							<h5>Please suggest a new kindtype for this instance (e.g. xyz)</h5><br>
-							Name of the new Kindtype: <input type="text" name="suggested_kt" />
+							<h5>Please suggest a new kindtype for this instance</h5>
+							<a href="#" onClick="toggleInstruction('instruction_newtype')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_newtype" style="display:none"> ...instruction contents... </div><br>
+							Name of the new Kindtype: <input type="text" name="suggested_kt" /><br><br>
 							<div id="parent_kt_question" style="display:none">
-								<h5>Which is the parent type of your newly suggested type?</h5><br>
+								<h5>Which is the parent type of your newly suggested type?</h5>
+								<a href="#" onClick="toggleInstruction('instruction_typep')">Show/Hide additional instructions...</a><br>
+								<div id="instruction_typep" style="display:none"> ...instruction contents... </div><br>
 								<table id="parent_kt_table">
 									<caption>
 										<a href="#"
@@ -506,6 +516,14 @@
 		function addFeatureValue(idstr) {
 			$("#" + idstr).append('<input type="text" name="' + idstr + '_' + featureNum + '"><br>');
 			++featureNum;
+		}
+
+		function toggleInstruction(divid) {
+			if($("#"+divid).is(":visible")) {
+				$("#"+divid).hide();
+			} else {
+				$("#"+divid).show();
+			}
 		}
 
 		function stage_0() {
@@ -649,35 +667,38 @@
 			} else {
 				kt = $("input[name='radio_ktname']:checked").val();
 			}
-			let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="general_def_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('general_def_' + kt);
-			addFeatureValue('general_def_' + kt);
+			// let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="general_def_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('general_def_' + kt);
+			// addFeatureValue('general_def_' + kt);
 
-			str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="helpful_attr_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
+			// str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="helpful_attr_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
 
-			str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="characteristics_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
+			// str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="characteristics_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
 
-			str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5>e.g. ......<br>';
+			let str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5><a href="#" onClick="toggleInstruction(\'instruction_features\')">Show/Hide additional instructions...</a><br>';
+			str += '<div id="instruction_features" style="display:none"> ...instruction contents... </div><br>';
 			str += '<div id="ifeature_' + kt + '"></div>';
 			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
 			$("#feature_list_area").append(str);
+			addFeatureValue('ifeature_' + kt);
+			addFeatureValue('ifeature_' + kt);
 			addFeatureValue('ifeature_' + kt);
 			addFeatureValue('ifeature_' + kt);
 
