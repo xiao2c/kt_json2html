@@ -486,17 +486,19 @@
 			return "bird"; // TODO: get from database
 		}
 
+		// new change: there may be more than one kt match categories at same time
 		function isTerminal() {
 			selectedCategories.sort();
+			let result = [];
 			for (let i = 0; i < allKindTypes.length; i++) {
 				let kt = allKindTypes[i];
 				let parents = kt.parents.sort();
 				if (arraysEqual(selectedCategories, parents)) {
-					return kt.name;
+					result.push(kt.name);
 				}
 			}
 
-			return null;
+			return result;
 		}
 
 		function arraysEqual(a, b) {
@@ -544,7 +546,10 @@
 			$("div[id^='cat_childset_" + root + "_']").show();
 		}
 
-		function stage_1_1(ktName) {
+		function stage_1_1(ktNameArray) {
+			
+			ktName = ktNameArray[0];
+
 			$("#stage_1_head").hide();
 			let $showlist = $("div[id^='cat_childset_']:visible");
 			$showlist.hide();
@@ -559,7 +564,7 @@
 					let v = $(this).val();
 					if (v === "yes") {
 						$("#kt_halfway").hide();
-						stage_2(ktName);
+						stage_2([ktName]);
 					} else {
 						$("#kt_halfway").hide();
 						$("#stage_1_head").show();
@@ -569,16 +574,18 @@
 			});
 		}
 
-		function stage_2(ktName) {
-			// get root kt
-			let rootkt = getKtByName(ktName);
-			// get the sub kindtype treee based on the root ktName
-			appendSubKts(rootkt, "");
-			// console.log("subKtTree : " + JSON.stringify(subKtTree));
-
+		function stage_2(ktNameArray) {
 			// clear stage 1 displays and show stage 2 head
 			$("#stage_1_head").hide();
 			$("#stage_2_head").show();
+
+			for (let t = 0; t < ktNameArray.length; t++) {
+				// get root kt
+				let rootkt = getKtByName(ktNameArray[t]);
+				// get the sub kindtype treee based on the root ktName
+				appendSubKts(rootkt, "");
+				// console.log("subKtTree : " + JSON.stringify(subKtTree));
+			}
 
 			// generate table rows
 			let tbodyStr = "";
@@ -589,7 +596,6 @@
 				tbodyStr += '<td>' + kt.description + '</td>';
 				tbodyStr += '<td>' + kt.instances.join(", ") + '</td></tr>';
 			}
-
 			$("#kt_table_body").html(tbodyStr);
 			$("#kt_table").treetable({ expandable: true, force: true });
 			$("#kt_selection").show();
@@ -850,14 +856,14 @@
 							$("#" + this.name.replace("cat_radio_", "cat_childset_")).hide();
 						}
 						// check if current categories match any kindtype
-						let kt = isTerminal();
+						let kt = isTerminal(); // return an array
 						let shown = $("div[id^='cat_childset_']:visible").length;
 						let allselected = false; // does all leaf childsets selected by user?
 						if (shown === $("input[name^='cat_radio_']:visible:checked").length) {
 							allselected = true;
 						}
 
-						if (kt !== null) {
+						if (kt !== null && kt.length>0) {
 							// enter stage 2 for kindtypes
 							updateSelectedDisplay();
 							if (allselected) {
