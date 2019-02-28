@@ -36,15 +36,31 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-header">
-						header ... <a href="#" data-toggle="collapse" data-target="#card1" style="font-size:0.6rem;font-weight:bold">Collapse/Expand</a>
+						Task Brief<a href="#" data-toggle="collapse" data-target="#card1" style="font-size:0.6rem;font-weight:bold"> (Click to collapse/expand) </a>
 					</div>
 					<div id="card1" class="collapse show">
 						<div class="card-body">
-							content ...
+							<p><b>Note:</b> To save your time, you can skip/collapse the below and start the task from the task page below. The task layout is designed to be intuitive and instructions are provided within. </p>
+							<p><b>Task description:</b> You will be presented with a noun and example sentences containing the noun. <mark>Based on your understanding of the noun in the provided sentences,</mark> we require you to: </p>
+							<ol>
+							<li> <b>Subtask 1- Category Selection (40% time):</b> Select relevant categories from given options. </li>
+							<li> <b>Subtask 2- "Kind" assignment (10% time):</b> Assign a representative "kind" to the noun. A "kind" is a suitable group to which the noun belongs. Some examples:
+							<ul>
+							<li>tiger -> "MAMMAL" </li>
+							<li>gear, vehicle -> "VEHICLE_PARTS"</li>
+							<li>time, length -> "ABSTRACT_UNIVERSAL_MEASURE"</li>
+							</ul>
+							</li>
+							<li> <b>Subtask 3- Feature filling (50% time):</b> Provide <b>general/layman's</b> information for the noun.</li>
+							</ol>
+							<p><b>Expanded instructions:</b> Available within the task page upon beginning the task.</p>
+							<p><b>Estimated time for task:</b> 10 minutes (timing is not considered in quality checks) </p>
+							<p><b>Feedback options: </b> Optional form provided at the end of the task (incase of issues with task layout, instructions complexity or remuneration, etc) </p>
+							<p class = "well well-sm">
+							<strong><mark>Quality of work: </mark></strong>
+							We will be performing rigorous quality checks for collected responses. If your work is consistently incomplete, low quality or frequently disagreeing with the responses of other workers, we might have to reject your work.</p>
 						</div>
-						<div class="card-footer">
-							footer ...
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -54,10 +70,15 @@
 			<div class="col-3">
 				<div class="card">
 					<div class="card-header">
-						header ...
+						Provided Noun Information
 					</div>
 					<div class="card-body">
-						content ...
+						<h4>Noun:</h4> <p>${instance_name}</p>
+						<h4>Example sentences: </h4>
+						<ul>
+						<li><p>${instance_sentence1}</p></li>
+						<li><p>${instance_sentence2}</p></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -65,25 +86,44 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-header">
-						header ...
+						Task page 
 					</div>
 					<div class="card-body">
 
 						<input type="hidden" name="SelectedInstance" value="">
 
 						<div id="welcome_page" style="display:none">
-							<h5>Instructions</h5>
-							<p>... instructions ...</p>
 							<p><a href="#" onclick="stage_1()" class="btn btn-info">Start</a></p>
 						</div>
-						<div id="instance_head" style="display:none">
-							<h4>Instance: <span id="the_instance"></span></h4>
-						</div>
+						
+						
 						<div id="stage_1_head" style="display:none">
-							<h5>Please select correct category for this instance. (You can click on the category name for more information)</h5><br>
+							<h5><b>Subtask 1:</b> Select appropriate categories for ${instance_name} given its context in the example sentences on the left</h5>
+							<a href="#" onClick="toggleInstruction('instruction_1')">Toggle additional instructions...</a><br>
+							<div id="instruction_1" style="display:none">
+							<ul>
+							<li>Categories will auto-update upon selection. Terminal categories will not.</li>
+							<li>To know more about a category, click on it to open a brief description and view sample nouns. </li>
+							<li>Categories can be deselected in case you wish to undo / realize a previously incorrect selection.</li>
+							</ul>
+							</div><br>
 						</div>
 						<div id="stage_2_head" style="display:none">
-							<h5>Please select the most appropriate type for this instance.</h5><br>
+							<h5><b>Subtask 2:</b> Assign an appropriate "kind" for this instance.</h5>
+							<a href="#" onClick="toggleInstruction('instruction_2')">Toggle additional instructions...</a><br>
+							<div id="instruction_2" style="display:none"> 
+							<ul>
+							<li>A "kind" refers to a suitable group to which a noun belongs. </li>
+							<ul>
+							<li>'tiger','elephant' -> "MAMMAL" kind</li>
+							<li>'gear', 'vehicle' -> "VEHICLE_PARTS kind </li>
+							<li>'time', 'length' -> "ABSTRACT_UNIVERSAL_MEASURE" </li>
+							</ul>
+							<li>Given a choice between two kinds, choose the more specific kind (e.g. given tiger, 'MAMMAL' is more appropriate than 'ANIMAL')
+							<li>If unsure, see whether the noun matches with sample instances of provided kinds.</li>
+							
+							</ul>
+							</div><br>
 						</div>
 
 						<!-- Start java generated html -->
@@ -93,12 +133,7 @@
 							<input type="radio" name="cat_radio_ENTITY_0" value="cat_REAL"> <span class="cat-option-text" id="cat_REAL">REAL</span><br>
 							<br>
 						</div>
-						<div id="cat_childset_ENTITY_1">
-							<strong>Select a sub-category under ENTITY:</strong><br>
-							<input type="radio" name="cat_radio_ENTITY_1" value="cat_INDIVIDUAL"> <span class="cat-option-text" id="cat_INDIVIDUAL">INDIVIDUAL</span><br>
-							<input type="radio" name="cat_radio_ENTITY_1" value="cat_COLLECTIVE"> <span class="cat-option-text" id="cat_COLLECTIVE">COLLECTIVE</span><br>
-							<br>
-						</div>
+						
 						<div id="cat_ENTITY_dialog" style="display:none">
 							<div id="cat_ENTITY_description">The root node</div>
 							<div id="cat_ENTITY_examples">woman, law, football, sentence, forest, aircraft, tiger, nurse</div>
@@ -133,14 +168,10 @@
 						</div>
 						<div id="cat_REAL_dialog" style="display:none">
 							<div id="cat_REAL_description">A real object or event.</div>
-							<div id="cat_REAL_examples">woman, football, forest, aircraft, tiger, nurse, program</div>
+							<div id="cat_REAL_examples">woman, football, play, talk, forest, aircraft, tiger, nurse, program</div>
 							<div id="cat_REAL_features">[]</div>
 						</div>
-						<div id="cat_INDIVIDUAL_dialog" style="display:none">
-							<div id="cat_INDIVIDUAL_description">An entity that occurs as a singular or is not compositional.</div>
-							<div id="cat_INDIVIDUAL_examples">woman, football, cake, aircraft, tiger</div>
-							<div id="cat_INDIVIDUAL_features">[]</div>
-						</div>
+						
 						<div id="cat_IDEAL_dialog" style="display:none">
 							<div id="cat_IDEAL_description">An abstract entity that represents a desired state. For example, 'order' in 'law and order' </div>
 							<div id="cat_IDEAL_examples">law, justice, standard, peace, order</div>
@@ -179,23 +210,23 @@
 							<br>
 						</div>
 						<div id="cat_PHYSICAL_dialog" style="display:none">
-							<div id="cat_PHYSICAL_description">A physical object</div>
-							<div id="cat_PHYSICAL_examples">rock, automobile, football, engine, bird, diamond, gasoline</div>
+							<div id="cat_PHYSICAL_description">A physical object that exists in the real world.</div>
+							<div id="cat_PHYSICAL_examples">rock, tiger, automobile, body, football, engine, bird, diamond, gasoline</div>
 							<div id="cat_PHYSICAL_features">[{"feature_name":"shape","example":"round","explain":"The general shape of an object (mostly geometrical shapes, but exceptions may exist)"},{"feature_name":"size","example":"house-sized","explain":"The size of an object (use vehicles or buildings for comparison (ex: elephant-\u003e big-\u003e truck sized)"},{"feature_name":"color","example":"red","explain":"The common color of an object"},{"feature_name":"material","example":"steel","explain":"The material property (steel, paper, fibers, biological tissue, etc)"},{"feature_name":"texture","example":"rough","explain":"The texture of an object (smooth, rough, etc)"},{"feature_name":"odor","example":"smelly","explain":"The common odor associated with object"},{"feature_name":"taste","example":"sweet","explain":"The common taste associated with object"},{"feature_name":"location","example":"Underwater","explain":"The common location of an object"},{"feature_name":"strength","example":"can lift a car","explain":"Strength of the object"},{"feature_name":"state","example":"plasma","explain":"The physical state of an object (gas, liquid, solid...)"}]</div>
 						</div>
 						<div id="cat_SENTIENT_dialog" style="display:none">
-							<div id="cat_SENTIENT_description">A human type with specific traits and goals.</div>
+							<div id="cat_SENTIENT_description">An entity or an organization that can talk, interact and behaves with human qualities. (Animals and primates are hence non-sentient but companies and organizations are sentient).</div>
 							<div id="cat_SENTIENT_examples">woman, lawyer, secretary, clinic, Boeing, crowd, nurse</div>
 							<div id="cat_SENTIENT_features">[{"feature_name":"internal_trait","example":"calculative","explain":"The distinctive trait of a particular sentient. For example, lawyers are commonly quick-thinking, etc"},{"feature_name":"goal","example":"score goals (for football strikers)","explain":"The goal of a sentient. For example, lawyers have the goal to win cases for clients."}]</div>
 						</div>
 						<div id="cat_NATURAL_dialog" style="display:none">
 							<div id="cat_NATURAL_description">A naturally occuring entity (not created/developed by human)</div>
-							<div id="cat_NATURAL_examples">woman, rock, heat, gold, bird, summer, diamond</div>
+							<div id="cat_NATURAL_examples">woman, dog, winter, rock, heat, wolf, gold, bird </div>
 							<div id="cat_NATURAL_features">[]</div>
 						</div>
 						<div id="cat_SOCIAL_dialog" style="display:none">
-							<div id="cat_SOCIAL_description">An entity created by humans or arising from society.</div>
-							<div id="cat_SOCIAL_examples">laywer, secretary, clinic, marriage, engine, football</div>
+							<div id="cat_SOCIAL_description">An entity created by humans or arising from society. (Hence, a 'pet animal' such as "chihuahua" would be a SOCIAL noun but "dog" would be a NATURAL noun).</div>
+							<div id="cat_SOCIAL_examples">laywer, chihuahua, secretary, clinic, marriage, engine, football</div>
 							<div id="cat_SOCIAL_features">[{"feature_name":"function","example":"open cans (for can-openers)","explain":"Either what an object is used for, or what a person/sentient does"},{"feature_name":"requirement","example":"batteries (for most electronic toys)","explain":"The prerequisites or required tools or objects to function"},{"feature_name":"processing","example":"","explain":"The manner in which a SOCIAL entity is processed/created/comes to be "}]</div>
 						</div>
 						<div id="cat_LIVING_dialog" style="display:none">
@@ -209,8 +240,8 @@
 							<div id="cat_NONLIVING_features">[{"feature_name":"Expiration_date","example":"12/2/2019","explain":"Describes a previously determined date after which something should no longer be used."}]</div>
 						</div>
 						<div id="cat_STATIONARY_dialog" style="display:none">
-							<div id="cat_STATIONARY_description">Describes things that are normally immobile, attached to the earth and moved only at great effort.</div>
-							<div id="cat_STATIONARY_examples">building, tree, mountain</div>
+							<div id="cat_STATIONARY_description">Describes things that are normally immobile, attached to the earth and moved only with immensely great effort.</div>
+							<div id="cat_STATIONARY_examples">building, tree, mountain, house</div>
 							<div id="cat_STATIONARY_features">[]</div>
 						</div>
 						<div id="cat_childset_NONSTATIONARY_0">
@@ -221,46 +252,20 @@
 						</div>
 						<div id="cat_NONSTATIONARY_dialog" style="display:none">
 							<div id="cat_NONSTATIONARY_description">Describes things that are able to move or be moved.</div>
-							<div id="cat_NONSTATIONARY_examples"></div>
+							<div id="cat_NONSTATIONARY_examples">mouse, chair, car, air, dog, rock, water</div>
 							<div id="cat_NONSTATIONARY_features">[]</div>
 						</div>
 						<div id="cat_SELFMOVING_dialog" style="display:none">
 							<div id="cat_SELFMOVING_description">Describes things that are normally in motion or designed for motion, in some cases with no apparent initial source.</div>
-							<div id="cat_SELFMOVING_examples">dog, truck</div>
+							<div id="cat_SELFMOVING_examples">dog, truck, air, car, wind</div>
 							<div id="cat_SELFMOVING_features">[{"feature_name":"Energy_source","example":"Food","explain":"Describes the source of energy which enables the object to move on its own."}]</div>
 						</div>
 						<div id="cat_NONSELFMOVING_dialog" style="display:none">
 							<div id="cat_NONSELFMOVING_description">Describes things that are normally immobile but can be moved with slight effort.</div>
-							<div id="cat_NONSELFMOVING_examples">brick, rock</div>
+							<div id="cat_NONSELFMOVING_examples">brick, rock, chair, lego_block</div>
 							<div id="cat_NONSELFMOVING_features">[{"feature_name":"Cause_of_motion","example":"A ball is thrown","explain":"Describes the action(s) necessary for the object to be moved."}]</div>
 						</div>
-						<div id="cat_childset_COLLECTIVE_0">
-							<strong>Select a sub-category under COLLECTIVE:</strong> (<a href="#" onClick="backTo('COLLECTIVE')">Deselect COLLECTIVE</a>)<br>
-							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_MASS"> <span class="cat-option-text" id="cat_MASS">MASS</span><br>
-							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_SET"> <span class="cat-option-text" id="cat_SET">SET</span><br>
-							<input type="radio" name="cat_radio_COLLECTIVE_0" value="cat_STRUCTURE"> <span class="cat-option-text" id="cat_STRUCTURE">STRUCTURE</span><br>
-							<br>
-						</div>
-						<div id="cat_COLLECTIVE_dialog" style="display:none">
-							<div id="cat_COLLECTIVE_description">Describes a group of entities as a whole.</div>
-							<div id="cat_COLLECTIVE_examples">dog, truck</div>
-							<div id="cat_COLLECTIVE_features">[{"feature_name":"countability","example":"Countable","explain":"Explains if the collective entity is countable or not."}]</div>
-						</div>
-						<div id="cat_MASS_dialog" style="display:none">
-							<div id="cat_MASS_description">Even the smallest amount is of the same material nature as the collective term (a drop of water is still water), and whose members are referred to only in terms of measurable units.</div>
-							<div id="cat_MASS_examples">water, sand</div>
-							<div id="cat_MASS_features">[{"feature_name":"Smallest_element_name","example":"grain","explain":"Describes the object in terms of the smallest amount of it."}]</div>
-						</div>
-						<div id="cat_SET_dialog" style="display:none">
-							<div id="cat_SET_description">Each member of the set is the same kind as every other member.</div>
-							<div id="cat_SET_examples">herd</div>
-							<div id="cat_SET_features">[]</div>
-						</div>
-						<div id="cat_STRUCTURE_dialog" style="display:none">
-							<div id="cat_STRUCTURE_description">Each member is of the same kind type as every other member; members have specified relations with one another.</div>
-							<div id="cat_STRUCTURE_examples">company</div>
-							<div id="cat_STRUCTURE_features">[{"feature_name":"hierarchy","example":"management,staff","explain":"describes the roles inside the structure"},{"feature_name":"roles","example":"managers are in charge of managing staff","explain":"explains the duty and responsibility of the role"}]</div>
-						</div>
+						
 						<div id="cat_childset_TEMPORAL_0">
 							<strong>Select a sub-category under TEMPORAL:</strong> (<a href="#" onClick="backTo('TEMPORAL')">Deselect TEMPORAL</a>)<br>
 							<input type="radio" name="cat_radio_TEMPORAL_0" value="cat_RELATIONAL"> <span class="cat-option-text" id="cat_RELATIONAL">RELATIONAL</span><br>
@@ -268,7 +273,7 @@
 							<br>
 						</div>
 						<div id="cat_TEMPORAL_dialog" style="display:none">
-							<div id="cat_TEMPORAL_description">There is a time aspect to the entity in question.</div>
+							<div id="cat_TEMPORAL_description">An event or something which has event or time based properties (e.g. 'earthquake' is an event based noun)</div>
 							<div id="cat_TEMPORAL_examples">party, hurricane, winter</div>
 							<div id="cat_TEMPORAL_features">[]</div>
 						</div>
@@ -361,7 +366,9 @@
 						<!-- End java generated html -->
 
 						<div id="kt_halfway" style="display:none">
-							<h5>Is this instance belong to following type?</h5><br>
+							<h5>Does this noun belong to following type?</h5><br>
+							<a href="#" onClick="toggleInstruction('instruction_type')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_type" style="display:none"> <ul><li>Remember to choose the kind based on the understanding from the context provided in the sentences</li></ul> </div><br>
 							<div>
 								<strong>Type: <span id="h_kt_name"></span></strong><br>
 								<span id="h_kt_desc"></span><br>
@@ -391,15 +398,18 @@
 								<tbody id="kt_table_body">
 								</tbody>
 							</table>
-							<input type="radio" name="radio_ktname" value="NOMATCH"> None of the above type.
+							<input type="radio" name="radio_ktname" value="NOMATCH"> None of the above kinds apply
 							<p><br><a href="#" id="button1_to_stage3" class="btn btn-info">Next</a></p>
 						</div>
 
 						<div id="kt_suggest" style="display:none">
-							<h5>Please suggest a new kindtype for this instance (e.g. xyz)</h5><br>
-							Name of the new Kindtype: <input type="text" name="suggested_kt" />
+							<h5><b>Subtask 2:</b> Please suggest a new appropriate kind for the noun</h5>
+							
+							<a href="#" onClick="toggleInstruction('instruction_newtype')">Toggle additional instructions...</a>
+							<div id="instruction_newtype" style="display:none"><ul><li>Think of a representative group for the noun which captures conceptually similar nouns (e.g. "heat" might belong to "NATURAL_STATE" kind which can also identify "</li><li>Remember to assign a kind based on your understanding of the noun given the example sentences.</ul> </div><br>
+							Name of the new kind: <input type="text" name="suggested_kt" /><br><br>
 							<div id="parent_kt_question" style="display:none">
-								<h5>Which is the parent type of your newly suggested type?</h5><br>
+								<h5>Does the new kind attach under any existing parent kind?</h5>
 								<table id="parent_kt_table">
 									<caption>
 										<a href="#"
@@ -419,9 +429,7 @@
 									<tbody id="parent_kt_table_body">
 									</tbody>
 								</table>
-								<input type="radio" name="radio_parent_ktname" value="NONE"> None of the above is
-								suitable as a parent
-								type.
+								<input type="radio" name="radio_parent_ktname" value="NONE"> No parent kind is suitable
 							</div>
 							<p><br><a href="#" id="button2_to_stage3" class="btn btn-info">Next</a></p>
 						</div>
@@ -432,29 +440,38 @@
 						</div>
 
 					</div> <!-- card body end -->
-
-					<div id="selected_cat_display" class="card-footer">&nbsp;</div>
+					
+					<div id="selected_cat_display" class="card-footer">
+					<div id="selected_cat_display" style="color: gray; font-style: italic">
+						</div>
+					&nbsp;</div>
 				</div> <!-- card end -->
 			</div> <!-- col end -->
 		</div> <!-- row end -->
 
 	</div> <!-- container end -->
 
+		<div id="last_box" style="display:none">
 	<!-- outside container because last step will hide all div -->
-	<table id="feedback" style="width:98%;margin:1em" class="p-3">
+	<h3>Thank you for your help!<br>You can now click submit to complete the task.</h3>
+	<table id="feedback" style="width:100%" class="p-3">
 		<tr><td>
 		Feedback:
 		<textarea name="feedback_content" style="width:100%" rows="4"></textarea>
 		</td></tr>
+		<p><b>(ONLY FOR CHEEM TESTING)</b> If you have time, please provide detailed feedback from the following google form: <a href = "form_link" target ="_blank">Form Link (opens in new tab).</a> <b><mark>Don't forget to click the submit button</mark></b></p>
+		<p>Do you have any feedback or comments that would help improve our task? Feel free to write it here or email to <a href = "mailto: jaiswals_shantanu@scei.a-star.edu.sg">jaiswals_shantanu@scei.a-star.edu.sg</a>, we will do our best to take into consideration. </p>
 	</table>
-
-	<div id="last_box" style="display:none">
-		<h4>Thank you for your help!<br>Now you can click submit button to complete this task.</h4>
+		
 		<crowd-button form-action="submit" variant="primary">Submit</crowd-button>
 	</div>
 
 	<script>
-		const allKindTypes = [{ "type": "kind_type", "name": "INSTITUTION", "parents": ["COLLECTIVE", "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["organization", "company", "mro", "clinic", "aviation_1", "department"], "description": "An institution is a collective entity that works towards a goal, and is a byproduct/part of society. ", "children": ["COMPANY"], "feature_types": [{ "feature_name": "structure", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MAMMAL", "parents": ["VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["primate", "bovine"], "description": "A mammal is a vertebrate that generally is nourished with milk at young age, has hair on skin and is warm-blooded. For example, humans, bears, tiger.", "children": ["BOVINE", "PRIMATE"], "feature_types": [] }, { "type": "kind_type", "name": "PHYSICAL_QUALITY", "parents": ["INDIVIDUAL", "ENTITY", "QUALITY", "ABSTRACT"], "instances": ["reliability", "airworthiness", "safety"], "description": "This refers to abstract concepts in language that serve to convey the PHYSICAL quality of an object (such as it\u0027s reliability, effectiveness, etc)", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IDEAL_GROUP", "parents": ["COLLECTIVE", "ENTITY", "IDEAL", "ABSTRACT"], "instances": ["law"], "description": "This refers to abstract concepts that denote a collective ideal scenario/setting. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COMMUNICATIVE_EVENT", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["order_4", "instruction"], "description": "Refers to nouns denoting a communicative event between two entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_VERTEBRATE", "parents": ["DOMESTIC_ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["domestic_bird"], "description": "A domestic (one that is groomed in presence of sentients) vertebrate (an animal possessing a backbone/spine) such as fish, reptiles, mammals, birds and amphibians. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PRODUCT", "parents": ["COLLECTIVE", "ENTITY", "SOCIAL", "REAL", "NONLIVING", "PHYSICAL"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PLANT", "parents": ["INDIVIDUAL", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["tree"], "description": "A plant based entity", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COGNITIVE_CONCEPTION", "parents": ["INDIVIDUAL", "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["understanding_1", "knowledge"], "description": "This refers to concepts that denote abstract cognitive phenomena that can be measured empirically", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "KITCHEN_TOOL", "parents": ["MANMADEOBJ", "INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["knife"], "description": "A tool found/used in the kitchen or for it\u0027s related activities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "REGION", "parents": ["COLLECTIVE", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["range"], "description": "Refers to a collective region spanning an area.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_STATE_GROUP", "parents": ["COLLECTIVE", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["summer", "winter "], "description": "Refers to the natural states of the world that are thought of in a collective sense.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADESYSTEM", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["system"], "description": "A manmade system comprising of multiple entities. It differs from an INSTITUTION since it is not SENTIENT.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_ANIMAL", "parents": ["INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["domestic_vertebrate", "steer"], "description": "Refers to domestic (brought up in the presence of sentients in a SOCIAL setting) animals ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HERD", "parents": ["COLLECTIVE", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["drove"], "description": "A herd refers to a large group of animals, and in this case, observed in a SOCIAL setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "WORK", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "SOCIAL"], "instances": [], "description": "Refers to concepts related to the activity of working in a SOCIAL setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_BIRD", "parents": ["DOMESTIC_VERTEBRATE", "DOMESTIC_ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["chicken"], "description": " Refers to a domestic (brought up in the presence of sentients in a SOCIAL setting) bird. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "EMOTIONAL_STATE", "parents": ["INDIVIDUAL", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "EMOTIONAL", "SOCIAL"], "instances": ["love", "condition_2"], "description": "Refers to an emotional state.....", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IDEAL_THING", "parents": ["INDIVIDUAL", "ENTITY", "IDEAL", "ABSTRACT"], "instances": ["order_1", "requirement", "standard", "justice"], "description": "Refers to concepts denoting ideal individual states/setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COLLECTION", "parents": ["COLLECTIVE", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["assemblage"], "description": "A nonliving, nonselfmoving, social collection of objects.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NUMERICAL", "parents": ["INDIVIDUAL", "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["one", "pi"], "description": "An entity denoting a numerical/mathematical value.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PEOPLE_GROUP", "parents": ["COLLECTIVE", "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["staff"], "description": "A group comprising of social sentients that have a goal.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOCUMENT", "parents": ["MANMADEOBJ", "INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["pdf", "report"], "description": "Refers to physical or virtual documents that have a purpose and other attributes.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COMPLEX", "parents": ["COLLECTIVE", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["shopping mall"], "description": "A social complex/system/structure composing of individual entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DISCOURSE", "parents": ["COLLECTIVE", "ENTITY", "PROPOSITIONAL", "ABSTRACT"], "instances": ["discourse"], "description": "Involves concepts relating to communication", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "GOAL_ORIENTED_ACTIVITY", "parents": ["COLLECTIVE", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["plan", "strategy", "program"], "description": "Refers to social goal oriented activities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLORA", "parents": ["COLLECTIVE", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["forest"], "description": "Relating to a group of plant like entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ACT_OF_GOD", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["hurricane", "earthquake"], "description": "Refers to natural nonmental event based nouns.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MUTUAL_STATE", "parents": ["INDIVIDUAL", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["understanding_2", "agreement", "order_3", "disagreement"], "description": "Refers to concepts denoting a mutual state between two entities- mostly sentients.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PEOPLE_EVENT", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["meeting", "party"], "description": "Refers to social events involving people/sentients.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ROLE", "parents": ["INDIVIDUAL", "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["secretary", "nurse"], "description": "Refers to a specific SOCIAL role", "children": [], "feature_types": [{ "feature_name": "relation_income", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MINERAL", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["rock"], "description": "Refers to naturally occuring minerals.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLEET", "parents": ["COLLECTIVE", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["armada"], "description": "Refers to a collection of social objects. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_PLACE", "parents": ["INDIVIDUAL", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["mountain"], "description": "Refers to a natural place in this universe", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PERSON", "parents": ["INDIVIDUAL", "ENTITY", "SENTIENT", "REAL", "NATURAL"], "instances": ["woman", "man"], "description": "Refers to a human being/person evoking SENTIENT attributes in contrast to the KT Human (which represents more PHYSICAL attributes)", "children": [], "feature_types": [{ "feature_name": "relation", "example": "", "explain": "" }, { "feature_name": "status", "example": "", "explain": "" }, { "feature_name": "name", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MEASURE", "parents": ["INDIVIDUAL", "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["second", "inch"], "description": "Refers to entities denoting the units of measurement of other entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_PLANT", "parents": ["INDIVIDUAL", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["wheat"], "description": "Refers to a domestic (grows in presence of sentients in a social setting) plant based entity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CROP", "parents": ["COLLECTIVE", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["wheat"], "description": "Refers to a domestic (grows in presence of sentients in a social setting) plant based entity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HUMAN", "parents": ["PRIMATE", "MAMMAL", "VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["John"], "description": "Refers to a human being in relation to its PHYSICAL attributes as opposed to the kind type PERSON (which refers to the more SENTIENT attributes)", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HISTORICAL_EPOCH", "parents": ["COLLECTIVE", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["renaissance"], "description": "Refers to a span of time in which certain SOCIAL activities/development took place.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PRIMATE", "parents": ["MAMMAL", "VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["human"], "description": "Refers to a specific type of mammal relating to monkeys, apes, humans, etc", "children": ["HUMAN"], "feature_types": [] }, { "type": "kind_type", "name": "COMPANY", "parents": ["INSTITUTION", "COLLECTIVE", "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["Boeing"], "description": "A specific INSTITUTION that operates in society and works towards a goal.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PART", "parents": ["INDIVIDUAL", "ENTITY", "PHYSICAL", "REAL"], "instances": ["bottom", "top", "part", "base_2"], "description": "Refers to general physical parts (both NATURAL and SOCIAL)", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ANIMAL", "parents": ["INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["vertebrate", "elephant"], "description": "Refers to a general ANIMAL (specializes into various types of ANIMALS).", "children": ["VERTEBRATE"], "feature_types": [{ "feature_name": "sex", "example": "", "explain": "" }, { "feature_name": "behaviour", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "SOCIAL_STATE_GROUP", "parents": ["COLLECTIVE", "ENTITY", "SOCIAL", "REAL", "STATE", "RELATIONAL", "TEMPORAL"], "instances": ["marriage"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CULTURE", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["e. coli"], "description": "A microbial culture, is a method of multiplying microbial organisms by letting them reproduce in predetermined culture medium under controlled laboratory conditions.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_PROCESS", "parents": ["INDIVIDUAL", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "NATURAL"], "instances": ["life_2", "process_2"], "description": "A process existing in or produced by nature (rather than by the intent of human beings).", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "STUFF", "parents": ["COLLECTIVE", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["gold"], "description": "An unspecified material substance or aggregate of matter.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "LOWER_ORDER_GROUP", "parents": ["COLLECTIVE", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["mold"], "description": "Refers to a species of lower lifeforms that do not move on their own such as plants or fungi", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CHEMICAL", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING"], "instances": ["base_3", "oil", "acid"], "description": "Any basic substance that is used in or produced by a reaction involving changes to atoms or molecules.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BIRD", "parents": ["VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["sparrow"], "description": "Any animal which has wings, has a beak, is covered in feathers and lays eggs.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BOVINE", "parents": ["MAMMAL", "VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["moose"], "description": "Any of a subfamily of bovids including oxen, bison and their close relatives.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADEPART", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["engine", "component"], "description": "Refers to components of any man-made machines.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "VERTEBRATE", "parents": ["ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["bird", "fish"], "description": "Any type of animal which possesses a backbone.", "children": ["BIRD", "FISH", "MAMMAL"], "feature_types": [] }, { "type": "kind_type", "name": "FLOW_GROUP", "parents": ["COLLECTIVE", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["river_system"], "description": "Refers to the collective form of entities which flow.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADEOBJ", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["document", "fuel", "kitchen_tool"], "description": "Describes anything (whole object, not just components) made by man.", "children": ["KITCHEN_TOOL", "FUEL", "DOCUMENT"], "feature_types": [] }, { "type": "kind_type", "name": "FISH", "parents": ["VERTEBRATE", "ANIMAL", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["trout"], "description": "Fish refer to any animals with gills and fins.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURALSYSTEM", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NATURAL"], "instances": ["ecology"], "description": "A biological classification based upon morphological and anatomical relationships and affinities considered in the light of phylogeny and embryology.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "task", "parents": ["SOCIAL_PROCESS", "INDIVIDUAL", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["Household chores"], "description": "A usually assigned piece of work often to be finished within a certain period of time.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MOVING_OBJECT", "parents": ["INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["football"], "description": "Any object that moves.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLOW", "parents": ["INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["river"], "description": "Describes a steady, continuous stream or supply of something.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "LOWER_ORDER", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["spore"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "POST_GOAL_EVENT_RESULT", "parents": ["INDIVIDUAL", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["failure", "success"], "description": "Describes the outcome of an event.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "maintenance", "parents": ["SOCIAL_PROCESS", "INDIVIDUAL", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["rcm"], "description": "Maintenence refers to the process of preserving a condition or situation or the state of being preserved.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IRREAL_GROUP", "parents": ["COLLECTIVE", "ENTITY", "IRREAL", "ABSTRACT"], "instances": ["host"], "description": "An organization that holds an event to which others are invited.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PERSONALITY", "parents": ["INDIVIDUAL", "ENTITY", "QUALITY", "ABSTRACT"], "instances": ["kindness"], "description": "Personality refers to individual differences in characteristic patterns of thinking, feeling and behaving. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PHYSICAL_STATE", "parents": ["INDIVIDUAL", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["condition_1"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PROCESS", "parents": ["INDIVIDUAL", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["process_1", "task", "maintenance", "replacement", "service", "repair", "inspection", "ransportation", "check", "engineering"], "description": "A process that often involves human effort", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURALPART", "parents": ["INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NATURAL"], "instances": ["hand"], "description": "A part of an individual entity that occurs naturally.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BODY", "parents": ["COLLECTIVE", "ENTITY", "SENTIENT", "REAL", "NATURAL"], "instances": ["crowd", "mob"], "description": "A collection of people", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "AREA", "parents": ["COLLECTIVE", "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "STATIONARY"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CULTURE_GROUP", "parents": ["COLLECTIVE", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["pencillin"], "description": "Defines a group of biological cultures", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_EVENT", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["release"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FAUNA", "parents": ["COLLECTIVE", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["pod"], "description": "The animals of a particular region, habitat or geological period.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "EQUIPMENT", "parents": ["COLLECTIVE", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["toolbox"], "description": "The set of necessary tools, clothing, etc. for a particular purpose.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "UBIQUITOUS_ABSTRACT_CONCEPTION", "parents": ["INDIVIDUAL", "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["risk_1", "length", "value", "order_2", "time", "life_1"], "description": "Refers to intangible everyday phenomena that cannot be felt using the five senses", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "AIR_VEHICLE", "parents": ["VEHICLE", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["aircraft"], "description": "Refers to a machine that is able to fly by gaining support form the air.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ARTIFACT", "parents": ["INDIVIDUAL", "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "SOCIAL"], "instances": ["machine??", "knife", "pickup", "house"], "description": "Refers to any constructs which are made by humans.", "children": [], "feature_types": [{ "feature_name": "operation", "example": "A pencil  performs its function of writing by gripping the pencil shaft, placing the lead on the paper and moving the lead to create words.", "explain": "Describes the performance and implementation of the function of a thing." }, { "feature_name": "construction", "example": "A shirt is constructed by sewing.", "explain": "Details how the entity is constructed" }, { "feature_name": "owner", "example": "An airplane is owned by an airline.", "explain": "Describes the owner of the entity." }] }, { "type": "kind_type", "name": "VEHICLE", "parents": ["INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["ground_vehicle", "air_vehicle", "automobile ", "ship"], "description": "A thing used for transporting people or goods.", "children": ["GROUND_VEHICLE", "AIR_VEHICLE"], "feature_types": [] }, { "type": "kind_type", "name": "GROUND_VEHICLE", "parents": ["VEHICLE", "INDIVIDUAL", "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["bike", "car"], "description": "...", "children": [], "feature_types": [{ "feature_name": "movement_mechanism", "example": "A car moves by burning fuel using its combustion engine, which causes its wheels to turn.", "explain": "Describes the how the vehicle moves." }, { "feature_name": "driver", "example": "A car is driven by 1 driver.", "explain": "Describes the nature of the driver." }, { "feature_name": "crew", "example": "For every 50 passengers on an airplane there is 1 cabin crew allocated.", "explain": "Describes the crew of the vehicle." }, { "feature_name": "passengers", "example": "A car usually has space for 4 passengers.", "explain": "Describes the passengers of the vehicle." }] }, { "type": "kind_type", "name": "PLACE", "parents": ["INDIVIDUAL", "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "STATIONARY"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ACT_OF_GOD_GROUP", "parents": ["COLLECTIVE", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["monsoon"], "description": "An instance of uncontrollable natural forces in operation.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COGNITIVE_ACTIVITY", "parents": ["INDIVIDUAL", "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "NATURAL"], "instances": ["thought"], "description": "Describes activity relating to, being, or involving conscious intellectual activity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PROPOSITION", "parents": ["INDIVIDUAL", "ENTITY", "PROPOSITIONAL", "ABSTRACT"], "instances": ["sentence"], "description": "A a statement putting forth an idea, suggestion or plan.", "children": [], "feature_types": [{ "feature_name": "content", "example": "The sentence contains an argument calling for the death penalty to be legalized", "explain": "Describes the things that are held or included in something." }, { "feature_name": "author", "example": "This argument was put forth by John", "explain": "Describes the person who originated or gave existence to the entity described" }, { "feature_name": "haspart", "example": "", "explain": "Describes anything an entity has." }, { "feature_name": "goal", "example": "He presented his arguments with the goal of legalising euthanasia.", "explain": "Describes the intended outcome." }, { "feature_name": "function", "example": "", "explain": "Functions performed by the entity." }] }, { "type": "kind_type", "name": "NATURAL_STATE", "parents": ["INDIVIDUAL", "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "NATURAL"], "instances": ["heat"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "transportation", "parents": ["SOCIAL_PROCESS", "INDIVIDUAL", "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["aviation_2"], "description": "Describe the means of moving humans, animals or goods from one location to another.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PLACE", "parents": ["INDIVIDUAL", "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["base_1", "building"], "description": "", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IMAGINARY", "parents": ["INDIVIDUAL", "ENTITY", "IRREAL", "ABSTRACT"], "instances": ["unicorn"], "description": "Describes entities that are not real.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FUEL", "parents": ["MANMADEOBJ", "INDIVIDUAL", "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["cng", "gasoline", "petrol", "diesel"], "description": "A fuel is any material that can be made to react with other substances so that it releases energy as heat energy or to be used for work.", "children": [], "feature_types": [] }];
+		//IMPORTANT:
+			//---- ------->FOR NOW, I am removing the KT "PART" since it seems slightly distractive/not in usual flow of program and already exists as NATURAL and SOCIALPART { "type": "kind_type", "name": "PART", "parents": ["ENTITY", "PHYSICAL", "REAL"], "instances": ["bottom", "top", "part", "base_2"], "description": "Refers to general physical parts (both NATURAL and SOCIAL)", "children": [], "feature_types": [] },
+			
+		const allKindTypes = [{ "type": "kind_type", "name": "INSTITUTION", "parents": [ "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["organization", "company", "mro", "clinic", "aviation_1", "department"], "description": "An institution is a collective entity that works towards a goal, and is a byproduct/part of society. ", "children": ["COMPANY"], "feature_types": [{ "feature_name": "structure", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MAMMAL", "parents": ["VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["primate", "bovine"], "description": "A mammal is a vertebrate that generally is nourished with milk at young age, has hair on skin and is warm-blooded. For example, humans, bears, tiger.", "children": ["BOVINE", "PRIMATE"], "feature_types": [] }, { "type": "kind_type", "name": "PHYSICAL_QUALITY", "parents": [ "ENTITY", "QUALITY", "ABSTRACT"], "instances": ["reliability", "airworthiness", "safety"], "description": "This refers to abstract concepts in language that serve to convey the PHYSICAL quality of an object (such as it\u0027s reliability, effectiveness, etc)", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IDEAL_GROUP", "parents": [ "ENTITY", "IDEAL", "ABSTRACT"], "instances": ["law"], "description": "This refers to abstract concepts that denote a collective ideal scenario/setting. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COMMUNICATIVE_EVENT", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["order_4", "instruction"], "description": "Refers to nouns denoting a communicative event between two entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_VERTEBRATE", "parents": ["DOMESTIC_ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["domestic_bird"], "description": "A domestic (one that is groomed in presence of sentients) vertebrate (an animal possessing a backbone/spine) such as fish, reptiles, mammals, birds and amphibians. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PRODUCT", "parents": [ "ENTITY", "SOCIAL", "REAL", "NONLIVING", "PHYSICAL"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PLANT", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["tree"], "description": "A plant based entity", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COGNITIVE_CONCEPTION", "parents": [ "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["understanding_1", "knowledge"], "description": "This refers to concepts that denote abstract cognitive phenomena that can be measured empirically", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "KITCHEN_TOOL", "parents": ["MANMADEOBJ",  "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["knife"], "description": "A tool found/used in the kitchen or for it\u0027s related activities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "REGION", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["range"], "description": "Refers to a collective region spanning an area.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_STATE_GROUP", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["summer", "winter "], "description": "Refers to the natural states of the world that are thought of in a collective sense.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADESYSTEM", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["system"], "description": "A manmade system comprising of multiple entities. It differs from an INSTITUTION since it is not SENTIENT.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_ANIMAL", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["domestic_vertebrate", "steer"], "description": "Refers to domestic (brought up in the presence of sentients in a SOCIAL setting) animals ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HERD", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["drove"], "description": "A herd refers to a large group of animals, and in this case, observed in a SOCIAL setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "WORK", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "SOCIAL"], "instances": [], "description": "Refers to concepts related to the activity of working in a SOCIAL setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_BIRD", "parents": ["DOMESTIC_VERTEBRATE", "DOMESTIC_ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["chicken"], "description": " Refers to a domestic (brought up in the presence of sentients in a SOCIAL setting) bird. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "EMOTIONAL_STATE", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "EMOTIONAL", "SOCIAL"], "instances": ["love", "condition_2"], "description": "Refers to an emotional state.....", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IDEAL_THING", "parents": [ "ENTITY", "IDEAL", "ABSTRACT"], "instances": ["order_1", "requirement", "standard", "justice"], "description": "Refers to concepts denoting ideal individual states/setting.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COLLECTION", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["assemblage"], "description": "A nonliving, nonselfmoving, social collection of objects.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NUMERICAL", "parents": [ "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["one", "pi"], "description": "An entity denoting a numerical/mathematical value.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PEOPLE_GROUP", "parents": [ "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["staff"], "description": "A group comprising of social sentients that have a goal.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOCUMENT", "parents": ["MANMADEOBJ",  "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["pdf", "report"], "description": "Refers to physical or virtual documents that have a purpose and other attributes.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COMPLEX", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["shopping mall"], "description": "A social complex/system/structure composing of individual entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DISCOURSE", "parents": [ "ENTITY", "PROPOSITIONAL", "ABSTRACT"], "instances": ["discourse"], "description": "Involves concepts relating to communication", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "GOAL_ORIENTED_ACTIVITY", "parents": [ "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["plan", "strategy", "program"], "description": "Refers to social goal oriented activities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLORA", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["forest"], "description": "Relating to a group of plant like entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ACT_OF_GOD", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["hurricane", "earthquake"], "description": "Refers to natural nonmental event based nouns.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MUTUAL_STATE", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["understanding_2", "agreement", "order_3", "disagreement"], "description": "Refers to concepts denoting a mutual state between two entities- mostly sentients.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PEOPLE_EVENT", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["meeting", "party"], "description": "Refers to social events involving people/sentients.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ROLE", "parents": [ "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["secretary", "nurse"], "description": "Refers to a specific SOCIAL role", "children": [], "feature_types": [{ "feature_name": "relation_income", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MINERAL", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["rock"], "description": "Refers to naturally occuring minerals.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLEET", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["armada"], "description": "Refers to a collection of social objects. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_PLACE", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["mountain"], "description": "Refers to a natural place in this universe", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PERSON", "parents": [ "ENTITY", "SENTIENT", "REAL", "NATURAL"], "instances": ["woman", "man"], "description": "Refers to a human being/person evoking SENTIENT attributes in contrast to the KT Human (which represents more PHYSICAL attributes)", "children": [], "feature_types": [{ "feature_name": "relation", "example": "", "explain": "" }, { "feature_name": "status", "example": "", "explain": "" }, { "feature_name": "name", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "MEASURE", "parents": [ "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["second", "inch"], "description": "Refers to entities denoting the units of measurement of other entities.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "DOMESTIC_PLANT", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["wheat"], "description": "Refers to a domestic (grows in presence of sentients in a social setting) plant based entity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CROP", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["wheat"], "description": "Refers to a domestic (grows in presence of sentients in a social setting) plant based entity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HUMAN", "parents": ["PRIMATE", "MAMMAL", "VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["John"], "description": "Refers to a human being in relation to its PHYSICAL attributes as opposed to the kind type PERSON (which refers to the more SENTIENT attributes)", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "HISTORICAL_EPOCH", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["renaissance"], "description": "Refers to a span of time in which certain SOCIAL activities/development took place.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PRIMATE", "parents": ["MAMMAL", "VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["human"], "description": "Refers to a specific type of mammal relating to monkeys, apes, humans, etc", "children": ["HUMAN"], "feature_types": [] }, { "type": "kind_type", "name": "COMPANY", "parents": ["INSTITUTION",  "ENTITY", "SENTIENT", "REAL", "SOCIAL"], "instances": ["Boeing"], "description": "A specific INSTITUTION that operates in society and works towards a goal.", "children": [], "feature_types": [] },  { "type": "kind_type", "name": "ANIMAL", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["vertebrate", "elephant"], "description": "Refers to a general ANIMAL (specializes into various types of ANIMALS).", "children": ["VERTEBRATE"], "feature_types": [{ "feature_name": "sex", "example": "", "explain": "" }, { "feature_name": "behaviour", "example": "", "explain": "" }] }, { "type": "kind_type", "name": "SOCIAL_STATE_GROUP", "parents": [ "ENTITY", "SOCIAL", "REAL", "STATE", "RELATIONAL", "TEMPORAL"], "instances": ["marriage"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CULTURE", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["e. coli"], "description": "A microbial culture, is a method of multiplying microbial organisms by letting them reproduce in predetermined culture medium under controlled laboratory conditions.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURAL_PROCESS", "parents": [ "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "NATURAL"], "instances": ["life_2", "process_2"], "description": "A process existing in or produced by nature (rather than by the intent of human beings).", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "STUFF", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["gold"], "description": "An unspecified material substance or aggregate of matter.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "LOWER_ORDER_GROUP", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["mold"], "description": "Refers to a species of lower lifeforms that do not move on their own such as plants or fungi", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CHEMICAL", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING"], "instances": ["base_3", "oil", "acid"], "description": "Any basic substance that is used in or produced by a reaction involving changes to atoms or molecules.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BIRD", "parents": ["VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["sparrow"], "description": "Any animal which has wings, has a beak, is covered in feathers and lays eggs.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BOVINE", "parents": ["MAMMAL", "VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["moose"], "description": "Any of a subfamily of bovids including oxen, bison and their close relatives.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADEPART", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["engine", "component"], "description": "Refers to components of any man-made machines.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "VERTEBRATE", "parents": ["ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["bird", "fish"], "description": "Any type of animal which possesses a backbone.", "children": ["BIRD", "FISH", "MAMMAL"], "feature_types": [] }, { "type": "kind_type", "name": "FLOW_GROUP", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["river_system"], "description": "Refers to the collective form of entities which flow.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MANMADEOBJ", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["document", "fuel", "kitchen_tool"], "description": "Describes anything (whole object, not just components) made by man.", "children": ["KITCHEN_TOOL", "FUEL", "DOCUMENT"], "feature_types": [] }, { "type": "kind_type", "name": "FISH", "parents": ["VERTEBRATE", "ANIMAL",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["trout"], "description": "Fish refer to any animals with gills and fins.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURALSYSTEM", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NATURAL"], "instances": ["ecology"], "description": "A biological classification based upon morphological and anatomical relationships and affinities considered in the light of phylogeny and embryology.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "task", "parents": ["SOCIAL_PROCESS",  "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["Household chores"], "description": "A usually assigned piece of work often to be finished within a certain period of time.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "MOVING_OBJECT", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["football"], "description": "Any object that moves.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FLOW", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "NATURAL"], "instances": ["river"], "description": "Describes a steady, continuous stream or supply of something.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "LOWER_ORDER", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["spore"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "POST_GOAL_EVENT_RESULT", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "SOCIAL"], "instances": ["failure", "success"], "description": "Describes the outcome of an event.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "maintenance", "parents": ["SOCIAL_PROCESS",  "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["rcm"], "description": "Maintenence refers to the process of preserving a condition or situation or the state of being preserved.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IRREAL_GROUP", "parents": [ "ENTITY", "IRREAL", "ABSTRACT"], "instances": ["host"], "description": "An organization that holds an event to which others are invited.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PERSONALITY", "parents": [ "ENTITY", "QUALITY", "ABSTRACT"], "instances": ["kindness"], "description": "Personality refers to individual differences in characteristic patterns of thinking, feeling and behaving. ", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PHYSICAL_STATE", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["condition_1"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PROCESS", "parents": [ "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["process_1", "task", "maintenance", "replacement", "service", "repair", "inspection", "ransportation", "check", "engineering"], "description": "A process that often involves human effort", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "NATURALPART", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NATURAL"], "instances": ["hand"], "description": "A part of an individual entity that occurs naturally.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "BODY", "parents": [ "ENTITY", "SENTIENT", "REAL", "NATURAL"], "instances": ["crowd", "mob"], "description": "A collection of people", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "AREA", "parents": [ "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "STATIONARY"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "CULTURE_GROUP", "parents": [ "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "SOCIAL"], "instances": ["pencillin"], "description": "Defines a group of biological cultures", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_EVENT", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "SOCIAL"], "instances": ["release"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FAUNA", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "LIVING", "NATURAL"], "instances": ["pod"], "description": "The animals of a particular region, habitat or geological period.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "EQUIPMENT", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["toolbox"], "description": "The set of necessary tools, clothing, etc. for a particular purpose.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "UBIQUITOUS_ABSTRACT_CONCEPTION", "parents": [ "ENTITY", "QUANTITY", "ABSTRACT"], "instances": ["risk_1", "length", "value", "order_2", "time", "life_1"], "description": "Refers to intangible everyday phenomena that cannot be felt using the five senses", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "AIR_VEHICLE", "parents": ["VEHICLE",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["aircraft"], "description": "Refers to a machine that is able to fly by gaining support form the air.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ARTIFACT", "parents": [ "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "SOCIAL"], "instances": ["machine??", "knife", "pickup", "house"], "description": "Refers to any constructs which are made by humans.", "children": [], "feature_types": [{ "feature_name": "operation", "example": "A pencil  performs its function of writing by gripping the pencil shaft, placing the lead on the paper and moving the lead to create words.", "explain": "Describes the performance and implementation of the function of a thing." }, { "feature_name": "construction", "example": "A shirt is constructed by sewing.", "explain": "Details how the entity is constructed" }, { "feature_name": "owner", "example": "An airplane is owned by an airline.", "explain": "Describes the owner of the entity." }] }, { "type": "kind_type", "name": "VEHICLE", "parents": [ "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["ground_vehicle", "air_vehicle", "automobile ", "ship"], "description": "A thing used for transporting people or goods.", "children": ["GROUND_VEHICLE", "AIR_VEHICLE"], "feature_types": [] }, { "type": "kind_type", "name": "GROUND_VEHICLE", "parents": ["VEHICLE",  "ENTITY", "SELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["bike", "car"], "description": "...", "children": [], "feature_types": [{ "feature_name": "movement_mechanism", "example": "A car moves by burning fuel using its combustion engine, which causes its wheels to turn.", "explain": "Describes the how the vehicle moves." }, { "feature_name": "driver", "example": "A car is driven by 1 driver.", "explain": "Describes the nature of the driver." }, { "feature_name": "crew", "example": "For every 50 passengers on an airplane there is 1 cabin crew allocated.", "explain": "Describes the crew of the vehicle." }, { "feature_name": "passengers", "example": "A car usually has space for 4 passengers.", "explain": "Describes the passengers of the vehicle." }] }, { "type": "kind_type", "name": "PLACE", "parents": [ "ENTITY", "NONLIVING", "PHYSICAL", "REAL", "STATIONARY"], "instances": [], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "ACT_OF_GOD_GROUP", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "NONMENTAL", "NATURAL"], "instances": ["monsoon"], "description": "An instance of uncontrollable natural forces in operation.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "COGNITIVE_ACTIVITY", "parents": [ "ENTITY", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "NATURAL"], "instances": ["thought"], "description": "Describes activity relating to, being, or involving conscious intellectual activity.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "PROPOSITION", "parents": [ "ENTITY", "PROPOSITIONAL", "ABSTRACT"], "instances": ["sentence"], "description": "A a statement putting forth an idea, suggestion or plan.", "children": [], "feature_types": [{ "feature_name": "content", "example": "The sentence contains an argument calling for the death penalty to be legalized", "explain": "Describes the things that are held or included in something." }, { "feature_name": "author", "example": "This argument was put forth by John", "explain": "Describes the person who originated or gave existence to the entity described" }, { "feature_name": "haspart", "example": "", "explain": "Describes anything an entity has." }, { "feature_name": "goal", "example": "He presented his arguments with the goal of legalising euthanasia.", "explain": "Describes the intended outcome." }, { "feature_name": "function", "example": "", "explain": "Functions performed by the entity." }] }, { "type": "kind_type", "name": "NATURAL_STATE", "parents": [ "ENTITY", "STATE", "RELATIONAL", "TEMPORAL", "REAL", "MENTAL", "NATURAL"], "instances": ["heat"], "description": "...", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "transportation", "parents": ["SOCIAL_PROCESS",  "ENTITY", "GOAL", "EVENT", "RELATIONAL", "TEMPORAL", "REAL", "ACTIVITY", "NONMENTAL", "SOCIAL"], "instances": ["aviation_2"], "description": "Describe the means of moving humans, animals or goods from one location to another.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "SOCIAL_PLACE", "parents": [ "ENTITY", "STATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["base_1", "building"], "description": "", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "IMAGINARY", "parents": [ "ENTITY", "IRREAL", "ABSTRACT"], "instances": ["unicorn"], "description": "Describes entities that are not real.", "children": [], "feature_types": [] }, { "type": "kind_type", "name": "FUEL", "parents": ["MANMADEOBJ",  "ENTITY", "NONSELFMOVING", "NONSTATIONARY", "PHYSICAL", "REAL", "NONLIVING", "SOCIAL"], "instances": ["cng", "gasoline", "petrol", "diesel"], "description": "A fuel is any material that can be made to react with other substances so that it releases energy as heat energy or to be used for work.", "children": [], "feature_types": [] }];
+
 		var subKtTree = []; // this is the sub kt tree based on the selected root kt. Note: there is an additional attribute 'parentname' added for each kt in this tree.
 		const root = "ENTITY";
 		var stage = 0; // 0 - Welcome page; 1 - Select categories; 2 - Select kindtype; 3 - Submit data and end.
@@ -503,6 +520,14 @@
 			++featureNum;
 		}
 
+function toggleInstruction(divid) {
+			if($("#"+divid).is(":visible")) {
+				$("#"+divid).hide();
+			} else {
+				$("#"+divid).show();
+			}
+		}
+
 		function stage_0() {
 			stage = 0;
 			$("#welcome_page").show();
@@ -521,7 +546,10 @@
 			$("div[id^='cat_childset_" + root + "_']").show();
 		}
 
-		function stage_1_1(ktName) {
+		function stage_1_1(ktNameArray) {
+			
+			ktName = ktNameArray[0];
+
 			$("#stage_1_head").hide();
 			let $showlist = $("div[id^='cat_childset_']:visible");
 			$showlist.hide();
@@ -536,7 +564,7 @@
 					let v = $(this).val();
 					if (v === "yes") {
 						$("#kt_halfway").hide();
-						stage_2(ktName);
+						stage_2([ktName]);
 					} else {
 						$("#kt_halfway").hide();
 						$("#stage_1_head").show();
@@ -546,16 +574,18 @@
 			});
 		}
 
-		function stage_2(ktName) {
-			// get root kt
-			let rootkt = getKtByName(ktName);
-			// get the sub kindtype treee based on the root ktName
-			appendSubKts(rootkt, "");
-			// console.log("subKtTree : " + JSON.stringify(subKtTree));
-
+		function stage_2(ktNameArray) {
 			// clear stage 1 displays and show stage 2 head
 			$("#stage_1_head").hide();
 			$("#stage_2_head").show();
+
+			for (let t = 0; t < ktNameArray.length; t++) {
+				// get root kt
+				let rootkt = getKtByName(ktNameArray[t]);
+				// get the sub kindtype treee based on the root ktName
+				appendSubKts(rootkt, "");
+				// console.log("subKtTree : " + JSON.stringify(subKtTree));
+			}
 
 			// generate table rows
 			let tbodyStr = "";
@@ -566,7 +596,6 @@
 				tbodyStr += '<td>' + kt.description + '</td>';
 				tbodyStr += '<td>' + kt.instances.join(", ") + '</td></tr>';
 			}
-
 			$("#kt_table_body").html(tbodyStr);
 			$("#kt_table").treetable({ expandable: true, force: true });
 			$("#kt_selection").show();
@@ -644,35 +673,38 @@
 			} else {
 				kt = $("input[name='radio_ktname']:checked").val();
 			}
-			let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="general_def_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('general_def_' + kt);
-			addFeatureValue('general_def_' + kt);
+			// let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="general_def_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('general_def_' + kt);
+			// addFeatureValue('general_def_' + kt);
 
-			str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="helpful_attr_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
+			// str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="helpful_attr_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
+			// addFeatureValue('helpful_attr_' + kt);
 
-			str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="characteristics_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
+			// str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
+			// str += '<div id="characteristics_' + kt + '"></div>';
+			// str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
+			// $("#feature_list_area").append(str);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
+			// addFeatureValue('characteristics_' + kt);
 
-			str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5>e.g. ......<br>';
+			let str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5><a href="#" onClick="toggleInstruction(\'instruction_features\')">Show/Hide additional instructions...</a><br>';
+			str += '<div id="instruction_features" style="display:none"> ...instruction contents... </div><br>';
 			str += '<div id="ifeature_' + kt + '"></div>';
 			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
 			$("#feature_list_area").append(str);
+			addFeatureValue('ifeature_' + kt);
+			addFeatureValue('ifeature_' + kt);
 			addFeatureValue('ifeature_' + kt);
 			addFeatureValue('ifeature_' + kt);
 
@@ -824,14 +856,14 @@
 							$("#" + this.name.replace("cat_radio_", "cat_childset_")).hide();
 						}
 						// check if current categories match any kindtype
-						let kt = isTerminal();
+						let kt = isTerminal(); // return an array
 						let shown = $("div[id^='cat_childset_']:visible").length;
 						let allselected = false; // does all leaf childsets selected by user?
 						if (shown === $("input[name^='cat_radio_']:visible:checked").length) {
 							allselected = true;
 						}
 
-						if (kt !== null) {
+						if (kt !== null && kt.length>0) {
 							// enter stage 2 for kindtypes
 							updateSelectedDisplay();
 							if (allselected) {
