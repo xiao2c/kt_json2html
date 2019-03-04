@@ -33,7 +33,15 @@
 </head>
 
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" id="d_consense">
+		<h4>Title</h4>
+		Consense content
+		<hr>
+		<input type="checkbox" id="check_consense"/> I have read and agree to the ...
+		<hr>
+		<a href="#" onclick="showHIT()" class="btn btn-info" style="display:none" id="link_consense">Continue</a>
+	</div>
+	<div class="container-fluid" style="display:none" id="d_hit">
 		<div class="row mb-3">
 			<div class="col">
 				<div class="card">
@@ -804,11 +812,24 @@
 			$("#selected_cat_display").html("Selected Categories: " + badges);
 		}
 
+		function showHIT() {
+			$("#d_consense").hide();
+			$("#d_hit").show();
+		}
+
 		// ***************************************************************************************
 		// Code run after document load
 		// ***************************************************************************************
 
 		$(function () {
+
+			$("#check_consense").on("click", function(e){
+				if ($(this).is(':checked')) {
+					$("#link_consense").show();
+				} else {
+					$("#link_consense").hide();
+				}
+			});
 
 			// hide all category questions
 			$("div[id^='cat_childset_']").hide();
