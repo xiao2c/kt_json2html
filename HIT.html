@@ -8,6 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-treetable@3.2.0-1/jquery.treetable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha256-fzFFyH01cBVPYzl16KT40wqjhgPtq6FFUB6ckN2+GGw=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@4"></script>
 <style>
 	.cat-option-text {
 		cursor: pointer;
@@ -28,10 +30,13 @@
 		text-align:center;
 	}
 	#d_consense {
-	    position: absolute;
+		position: absolute;
 		padding: 0rem 12rem 0rem 12rem;
 		font-size: 1rem;
 		
+	}
+	table.treetable {
+		font-size: 1em;
 	}
 </style>
 
@@ -62,9 +67,9 @@
 		
 		
 		
-		<input type="radio" name="c1" id="check_consense"/> I consent and wish to proceed to the task.
+		<input type="radio" name="c1" id="check_consense_yes"/> I consent and wish to proceed to the task.
 		<br/>
-		<input type="radio" name = "c1"/> I do not consent and do not wish to participate in the task.
+		<input type="radio" name = "c1" id="check_consense_no"/> I do not consent and do not wish to participate in the task.
 		<hr>
 		<a href="#" onclick="showHIT()" class="btn btn-info" id="link_consense">Continue</a>
 	</div>
@@ -140,7 +145,7 @@
 						<div id="stage_1_head" style="display:none">
 							<h5><b>Subtask 1:</b> Select appropriate categories for "${instance_name}" given its context in the example sentences on the left</h5>
 							<a href="#" onClick="toggleInstruction('instruction_1')">Toggle additional instructions...</a><br>
-							<div id="instruction_1" style="display:none">
+							<div id="instruction_1">
 							<ul>
 							<li>Categories will auto-update upon selection. Terminal categories will not.</li>
 							<li>To know more about a category, click on it to open a brief description and view sample nouns. </li>
@@ -151,7 +156,7 @@
 						<div id="stage_2_head" style="display:none">
 							<h5><b>Subtask 2:</b> Assign an appropriate "kind" for this instance.</h5>
 							<a href="#" onClick="toggleInstruction('instruction_2')">Toggle additional instructions...</a><br>
-							<div id="instruction_2" style="display:none"> 
+							<div id="instruction_2"> 
 							<ul>
 							<li>A "kind" refers to a suitable group to which a noun belongs. </li>
 							<ul>
@@ -169,7 +174,7 @@
 						<!-- Start java generated html -->
 						<div id="cat_childset_ENTITY_0">
 							<strong>Select a sub-category:</strong><br>
-							<input type="radio" name="cat_radio_ENTITY_0" value="cat_ABSTRACT"> <span class="cat-option-text" id="cat_ABSTRACT">ABSTRACT</span><br>
+							<input type="radio" name="cat_radio_ENTITY_0" value="cat_ABSTRACT"> <span class="cat-option-text" title="Click for more information." id="cat_ABSTRACT">ABSTRACT</span><br>
 							<input type="radio" name="cat_radio_ENTITY_0" value="cat_REAL"> <span class="cat-option-text" id="cat_REAL">REAL</span><br>
 							<br>
 						</div>
@@ -415,7 +420,7 @@
 						<div id="kt_halfway" style="display:none">
 							<h5>Does this noun belong to following type?</h5><br>
 							<a href="#" onClick="toggleInstruction('instruction_type')">Show/Hide additional instructions...</a><br>
-							<div id="instruction_type" style="display:none"> <ul><li>Remember to choose the kind based on the understanding from the context provided in the sentences</li></ul> </div><br>
+							<div id="instruction_type"> <ul><li>Remember to choose the kind based on the understanding from the context provided in the sentences</li></ul> </div><br>
 							<div>
 								<strong>Type: <span id="h_kt_name"></span></strong><br>
 								<span id="h_kt_desc"></span><br>
@@ -453,7 +458,7 @@
 							<h5><b>Subtask 2:</b> Please suggest a new "kind"/representative group for the noun</h5>
 							
 							<a href="#" onClick="toggleInstruction('instruction_newtype')">Toggle additional instructions...</a>
-							<div id="instruction_newtype" style="display:none"><ul><li>Think of a representative group for the noun which captures conceptually similar nouns (e.g. "heat" might belong to "NATURAL_STATE" kind which can also identify "humidity, pressure,etc") </li><li>Remember to assign a kind based on your understanding of the noun given the example sentences.</ul> </div><br>
+							<div id="instruction_newtype"><ul><li>Think of a representative group for the noun which captures conceptually similar nouns (e.g. "heat" might belong to "NATURAL_STATE" kind which can also identify "humidity, pressure,etc") </li><li>Remember to assign a kind based on your understanding of the noun given the example sentences.</ul> </div><br>
 							Name of the new kind: <input type="text" name="suggested_kt" /><br><br>
 							<div id="parent_kt_question" style="display:none">
 								<h5>Do any of the following existing kinds, identify as a <b>parent</b> to the new kind?</h5>
@@ -526,6 +531,10 @@
 		var stage = 0; // 0 - Welcome page; 1 - Select categories; 2 - Select kindtype; 3 - Submit data and end.
 		const theInstance = setInstance();
 		var selectedCategories = []; // names only
+
+		tippy('.cat-option-text', {
+			content: 'Click for more information.',
+		});
 
 		// ***************************************************************************************
 		// Define Functions
@@ -869,6 +878,12 @@ function toggleInstruction(divid) {
 		}
 
 		function showHIT() {
+			// verify radio button selection
+			if(!$("#check_consense_yes").prop("checked") && !$("#check_consense_no").prop("checked")) {
+				alert("Please select one option from above.");
+				return;
+			}
+
 			$("#d_consense").hide();
 			$("#d_hit").show();
 		}
@@ -877,14 +892,6 @@ function toggleInstruction(divid) {
 		// ***************************************************************************************
 
 		$(function () {
-				$("#check_consense").on("click", function(e){
-				if ($(this).is(':checked')) {
-					$("#link_consense").show();
-				} else {
-					$("#link_consense").hide();
-				}
-			});
-
 			// hide all category questions
 			$("div[id^='cat_childset_']").hide();
 
@@ -921,8 +928,26 @@ function toggleInstruction(divid) {
 					// validate the value is correct
 					if (v.startsWith("cat_")) {
 						let c = v.split("_")[1]; // category name
-						// store selected value in selected array 
-						selectedCategories.push(c);
+						// store selected value in selected array
+						if(!selectedCategories.includes(c)) {
+							selectedCategories.push(c);
+						}
+
+						// get all sibling names
+						let thisname = $(this).prop("name");
+						let siblings = $("input[name='"+thisname+"'");
+						for(let x=0; x<siblings.length; x++) {
+							let vx = $(siblings[x]).val();
+							let cx = vx.split("_")[1];
+							if(cx != c) {
+								let i = selectedCategories.indexOf(cx);
+								if (i >= 0) {
+									selectedCategories.splice(i, 1);
+								}
+							}
+						}
+						updateSelectedDisplay();
+
 						let chs = $("div[id^='cat_childset_" + c + "_']");
 						if ($(chs).length > 0) {
 							// display child categories if any
