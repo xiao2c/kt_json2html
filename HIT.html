@@ -64,9 +64,7 @@
 <hr>
 <p>By clicking the button below, you acknowledge that your participation in this experiment is voluntary, that you are at least 18 years of age, and that you are aware that you have the option to terminate your participation in the experiment at any time and for any reason. 
 </p>
-		
-		
-		
+
 		<input type="radio" name="c1" id="check_consense_yes"/> I consent and wish to proceed to the task.
 		<br/>
 		<input type="radio" name = "c1" id="check_consense_no"/> I do not consent and do not wish to participate in the task.
@@ -75,7 +73,6 @@
 	</div>
 	
 	<div class="container-fluid" style="display:none" id="d_hit">
-		
 		<div class="row mb-3">
 			<div class="col">
 				<div class="card">
@@ -456,7 +453,6 @@
 
 						<div id="kt_suggest" style="display:none">
 							<h5><b>Subtask 2:</b> Please suggest a new "kind"/representative group for the noun</h5>
-							
 							<a href="#" onClick="toggleInstruction('instruction_newtype')">Toggle additional instructions...</a>
 							<div id="instruction_newtype"><ul><li>Think of a representative group for the noun which captures conceptually similar nouns (e.g. "heat" might belong to "NATURAL_STATE" kind which can also identify "humidity, pressure,etc") </li><li>Remember to assign a kind based on your understanding of the noun given the example sentences.</ul> </div><br>
 							Name of the new kind: <input type="text" name="suggested_kt" /><br><br>
@@ -487,7 +483,11 @@
 						</div>
 
 						<div id="feature_filling" style="display:none">
-							<div id="feature_list_area"></div>
+							<h5> ...Title... </h5><br>
+							<a href="#" onClick="toggleInstruction('instruction_features')">Show/Hide additional instructions...</a><br>
+							<div id="instruction_features"> ...instructions... </div><br>
+							<div id="feature_list_area">
+							</div>
 							<p><br><a href="#" id="button3_to_stage4" class="btn btn-info">Next</a></p>
 						</div>
 
@@ -579,7 +579,7 @@
 			++featureNum;
 		}
 
-function toggleInstruction(divid) {
+		function toggleInstruction(divid) {
 			if($("#"+divid).is(":visible")) {
 				$("#"+divid).hide();
 			} else {
@@ -725,63 +725,73 @@ function toggleInstruction(divid) {
 			}
 		}
 
-		function stage_3(x) {
-			let kt = "";
-			if (x > 1) {
-				kt = $("input[name='suggested_kt']").val();
-			} else {
-				kt = $("input[name='radio_ktname']:checked").val();
+		function stage_3(case_value) {
+			let cat_feature_list = []; // e.g. [{"catname":"PHYSICAL", "features":[...]}, {"catname":"XYZ", "features":[...]}]
+			// get all features of selected categories
+			for(let i=0; i<selectedCategories.length; i++) {
+				let query = "#cat_"+selectedCategories[i]+"_features";
+				let objstr = $(query).text();
+				//console.log("features for : "+query+"; before parse : "+objstr);
+				let features = JSON.parse(objstr);
+				//console.log(features);
+				cat_feature_list.push({"catname":selectedCategories[i], "features":features});
 			}
-			/*let str = '<br><h5>Provide atleast 2 general definitions for the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="general_def_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'general_def_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('general_def_' + kt);
-			addFeatureValue('general_def_' + kt);
+			// get all features of parents plus selected kindtypes
+			let kt_feature_list = []; // e.g. [{"ktname":"ABC", "features":[...]}, {"ktname":"EFG", "features":[...]}]
+			switch(case_value) {
+				case 1: // get feature of selected kt and parents
+					let ktname = $("input[name='radio_ktname']:checked").val();
+					let kt = getKtFromSubTree(ktname);
+					let parents = getParentKTs(kt.parentname);
+					kt_feature_list.push({"ktname":ktname, "features":kt.feature_types});
+					for(let i=0; i<parents.length; i++) {
+						kt_feature_list.push({"ktname":parents[i].name, "features":parents[i].feature_types});
+					}
+					break;
+				case 2: // get feature of parents
+					let parentname = $("input[name='radio_parent_ktname']:checked").val();
+					if(parentname !== "NONE") {
+						let parents2 = getParentKTs(parentname);
+						for(let i=0; i<parents2.length; i++) {
+							kt_feature_list.push({"ktname":parents2[i].name, "features":parents2[i].feature_types});
+						}
+					}
+					break;
+				case 3: // no feature
+					break;
+			}
 
-			str = '<br><h5>List atleast 4 attributes helpful in recalling the term "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="helpful_attr_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'helpful_attr_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
-			addFeatureValue('helpful_attr_' + kt);
+			// generate feature filling form
+			let checkUserEnterFeatures = false;
+			for(let i=0; i<cat_feature_list.length; i++) {
+				let cat = cat_feature_list[i].catname; // category
+				let str = "<strong>" + cat + "</strong>";
+				str += '<br><div id="userenter_catfeature_'+cat+'"></div>';
+				str += '<a href="#" onclick="addFeatureValue(\'userenter_catfeature_'+cat+'\')">Add</a><br><br>';
+				$("#feature_list_area").append(str);
+				addFeatureValue('userenter_catfeature_'+cat);
+				addFeatureValue('userenter_catfeature_'+cat);
+				addFeatureValue('userenter_catfeature_'+cat);
+				checkUserEnterFeatures = true;
+			}
 
-			str = '<br><h5>Provide atleast 4 characteristics of the noun "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="characteristics_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'characteristics_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
-			addFeatureValue('characteristics_' + kt);
 
-			str = '<br><h5>Provide any 2 features that relate to the term "' + kt + '"</h5>e.g. ......<br>';
-			str += '<div id="ifeature_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-            */
-			let str = '<h5><b>Subtask 3:</b> Feature filling </h5> <h6>List atleast 10 things for the noun that come to your mind in its given context / example sentences.</h6> <a href="#" onClick="toggleInstruction(\'instruction_features\')">Toggle helpful cues if stuck..</a><br/>';
-			str += '<div id="instruction_features" style="display:none"><ul><li>Provide <b>characteristics / attributes</b> helpful in recalling term (e.g. tiger is ferocious, hammer can be held in hand, etc)</li><li>How would you <b>define/describe</b> the noun? (e.g. "tuning" -> mechanism or state to obtain optimal functioning of a system in relation to a task; "lawyer" -> a person that fights for cases in court, having graduated from law school)</li><li>List any <b>physical attributes</b> (has parts __, has shape __, size __, general color, heavy to lift, etc) </li><li>List relations of the noun (used by __, made by __, found in __)</li><li>Think of properties for selected categories of the noun (displayed in the footer below)</li></ul></div><br>';
-			
-			str += '<div id="ifeature_' + kt + '"></div>';
-			str += '<a href="#" class="btn btn-info btn-sm" onclick="addFeatureValue(\'ifeature_' + kt + '\')">Add</a><br>';
-			$("#feature_list_area").append(str);
-			
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
-			addFeatureValue('ifeature_' + kt);
+			// next button
 			$("#button3_to_stage4").on("click", function (e) {
+				// validate at least 8 user entered features
+				let textCnt = 0;
+				$("input[name^='userenter_catfeature_']").each(function(i, obj) {
+					userText = $(obj).val();
+					if(userText && $.trim(userText) !== "") {
+						textCnt = textCnt + 1;
+					}
+					// console.log("user entered feature " + userText);
+				});
+				if(textCnt < 8) {
+					toastr["warning"]("Please enter at least 8 features before proceed to next task.").attr('style', 'width: 600px !important; background-image: none !important');
+					return;
+				}
+
 				$("#instance_head").hide();
 				$("#feature_filling").hide();
 				stage_4("");
