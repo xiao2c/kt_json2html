@@ -648,6 +648,7 @@
         var stage = 0; // 0 - Welcome page; 1 - Select categories; 2 - Select kindtype; 3 - Submit data and end.
         const theInstance = setInstance();
         var selectedCategories = []; // names only
+        var pendingChildSets = []; // names of the cat_childset_xx to be displayed for selection.
 
         tippy(".cat-option-text", {
             content: "Click for more information.",
@@ -708,6 +709,22 @@
             }
         }
 
+        function selectCategory(catobj, catname) {
+            selectedCategories.push(catname);
+            $("div[id^='cat_childset_" + catname + "_']").each(function(){
+                pendingChildSets.push($(this).prop('id'));
+            });
+            // show next category selection from pending list
+            if(pendingChildSets.length > 0) {
+                let catid = pendingChildSets[0];
+                $("div[id='" + catid + "']").show();
+                pendingChildSets.splice(0, 1);
+                if(catobj != null) {
+                    $("#" + catobj.name.replace("cat_radio_", "cat_childset_")).hide();
+                }
+            }
+        }
+
         function stage_0() {
             stage = 0;
             $("#welcome_page").show();
@@ -721,9 +738,7 @@
             $("#stage_1_head").show();
 
             // Add root
-            selectedCategories.push(root);
-            // Show the first set of questions (always start from Entity)
-            $("div[id^='cat_childset_" + root + "_']").show();
+            selectCategory(null, root);
         }
 
         function stage_1_1(ktNameArray) {
@@ -993,14 +1008,13 @@
             // locate the parent div of obj
             let p = $("span[id='cat_" + objname + "']").parent();
             $(p).show();
-            $(p)
-                .children("input")
-                .prop("checked", false);
+            $(p).children("input").prop("checked", false);
 
             // traverse all grand children
             resetCat(objname);
 
             updateSelectedDisplay();
+            $("#continue-subtask").hide();
         }
 
         // clear and hide categories recursivly, remove from selected array
@@ -1011,16 +1025,20 @@
             }
             let d = $("div[id^='cat_childset_" + objname + "_']");
             if ($(d).length > 0) {
-                $(d)
-                    .children("input")
-                    .prop("checked", false);
-                $(d)
-                    .children("input")
-                    .each(function() {
+                $(d).children("input").prop("checked", false);
+                $(d).children("input").each(function() {
                         let name = this.value.substring(4);
                         resetCat(name);
                     });
                 $(d).hide();
+
+                $(d).each(function() {
+                    let catid = $(this).prop('id');
+                    let j = pendingChildSets.indexOf(catid);
+                    if (j >= 0) {
+                        pendingChildSets.splice(j, 1);
+                    }
+                });
             }
         }
 
@@ -1032,6 +1050,13 @@
                 badges += '<span class="badge badge-pill badge-secondary">' + selectedCategories[i] + "</span> ";
             }
             $("#selected_cat_display").html("Selected Categories: " + badges);
+
+            // show debug for pending categories
+            let debugstr = "";
+            for(let i=0; i<pendingChildSets.length; i++) {
+                debugstr += pendingChildSets[i] + ", ";
+            }
+            console.log("debugstr = " + debugstr);
         }
 
         function showHIT() {
@@ -1093,7 +1118,7 @@
                         let c = v.split("_")[1]; // category name
                         // store selected value in selected array
                         if (!selectedCategories.includes(c)) {
-                            selectedCategories.push(c);
+                            selectCategory(this, c);
                         }
 
                         // get all sibling names
@@ -1111,13 +1136,14 @@
                         }
                         updateSelectedDisplay();
 
-                        let chs = $("div[id^='cat_childset_" + c + "_']");
-                        if ($(chs).length > 0) {
-                            // display child categories if any
-                            $(chs).show();
-                            // only hide this category if there is children to show. This is to remain the option for user to change the category
-                            $("#" + this.name.replace("cat_radio_", "cat_childset_")).hide();
-                        }
+                        // let chs = $("div[id^='cat_childset_" + c + "_']");
+                        // if ($(chs).length > 0) {
+                        //     // display child categories if any
+                        //     $(chs).show();
+                        //     // only hide this category if there is children to show. This is to remain the option for user to change the category
+                        //     $("#" + this.name.replace("cat_radio_", "cat_childset_")).hide();
+                        // }
+
                         // check if current categories match any kindtype
                         let kt = isTerminal(); //return an array
                         let shown = $("div[id^='cat_childset_']:visible").length;
