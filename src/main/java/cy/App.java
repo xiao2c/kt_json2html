@@ -44,7 +44,7 @@ public final class App {
 		cfg.setLocale(Locale.US);
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-		Template template = cfg.getTemplate("category.ftl");
+		Template template = cfg.getTemplate("category.1.ftl");
 		Writer consoleWriter = new OutputStreamWriter(System.out);
 
 		Gson gson = new Gson();
@@ -75,7 +75,7 @@ public final class App {
 	}
 
 	static void loadDataFile() throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get("/Users/chenyi/Downloads/f_collated_data.json")));
+		String content = new String(Files.readAllBytes(Paths.get("/Users/chenyi/Downloads/Kindtype/updated_json_template_f.json")));
 		JsonElement jelement = new JsonParser().parse(content);
 		JsonArray jarray = jelement.getAsJsonArray();
 
