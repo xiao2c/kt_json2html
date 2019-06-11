@@ -17,4 +17,6 @@
 	<div id="cat_${obj.name}_description">${dialog_description}</div>
 	<div id="cat_${obj.name}_examples">${dialog_examples}</div>
 	<div id="cat_${obj.name}_features">${json_features}</div>
+	<div id="cat_${obj.name}_qnFeatureFilling">${json_qnFeatureFilling}</div>
+	<div id="cat_${obj.name}_qnFeatureMaking">${json_qnFeatureMaking}</div>
 </div>

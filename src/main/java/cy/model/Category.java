@@ -24,6 +24,12 @@ public class Category {
 	@SerializedName("example_instances")
 	@Expose
 	private List<String> exampleInstances = null;
+	@SerializedName("qn_feature_filling")
+	@Expose
+	private List<String> qnFeatureFilling = null;
+	@SerializedName("qn_feature_making")
+	@Expose
+	private List<String> qnFeatureMaking = null;
 
 	public String getType() {
 		return type;
@@ -71,6 +77,22 @@ public class Category {
 
 	public void setExampleInstances(List<String> exampleInstances) {
 		this.exampleInstances = exampleInstances;
+	}
+
+	public List<String> getQnFeatureFilling() {
+		return qnFeatureFilling;
+	}
+
+	public void setQnFeatureFilling(List<String> qnFeatureFilling) {
+		this.qnFeatureFilling = qnFeatureFilling;
+	}
+
+	public List<String> getQnFeatureMaking() {
+		return qnFeatureMaking;
+	}
+
+	public void setQnFeatureMaking(List<String> qnFeatureMaking) {
+		this.qnFeatureMaking = qnFeatureMaking;
 	}
 
 }

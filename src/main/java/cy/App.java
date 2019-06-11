@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import cy.model.Category;
 import cy.model.Instance;
@@ -27,6 +29,7 @@ public final class App {
 	static ArrayList<Category> CategoryList = new ArrayList<>();
 	static ArrayList<KindType> KindTypeList = new ArrayList<>();
 	static ArrayList<Instance> InstanceList = new ArrayList<>();
+	static List<String> genericQuestions = null;
 
 	private App() {
 	}
@@ -52,12 +55,16 @@ public final class App {
 			// Get information for dialog
 			String examples = String.join(", ", cat.getExampleInstances());
 			String features = gson.toJson(cat.getFeatureTypes());
+			String qnFeatureFillings = gson.toJson(cat.getQnFeatureFilling());
+			String qnFeatureMakings = gson.toJson(cat.getQnFeatureMaking());
 
 			Map<String, Object> input = new HashMap<String, Object>();
 			input.put("obj", cat);
 			input.put("dialog_description", cat.getDescription());
 			input.put("dialog_examples", examples);
 			input.put("json_features", features);
+			input.put("json_qnFeatureFilling", qnFeatureFillings);
+			input.put("json_qnFeatureMaking", qnFeatureMakings);
 
 			template.process(input, consoleWriter);
 
@@ -69,6 +76,14 @@ public final class App {
 			// fileWriter.close();
 			// }
 		}
+
+		Template template2 = cfg.getTemplate("global.ftl");
+		Map<String, Object> input = new HashMap<String, Object>();
+		if(genericQuestions != null) {
+			String generic_questions_str = gson.toJson(genericQuestions);
+			input.put("generic_questions", generic_questions_str);
+		}
+		template2.process(input, consoleWriter);
 
 		System.out.println("\n\n==== CY APP End ====\n");
 		System.out.println("ktjson:\n" + gson.toJson(KindTypeList));
@@ -97,6 +112,9 @@ public final class App {
 			case "instance":
 				Instance ins = gson.fromJson(obj, Instance.class);
 				InstanceList.add(ins);
+				break;
+			case "generic_questions":
+				genericQuestions = gson.fromJson(obj.getAsJsonArray("qn_feature_filling"), new TypeToken<List<String>>(){}.getType());
 				break;
 			}
 		}
