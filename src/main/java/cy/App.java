@@ -35,9 +35,10 @@ public final class App {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("\n\n==== CY APP Start ====\n");
+		String datafile = args[0];
+		System.out.println("\n\n==== HTML Start ====\n");
 
-		loadDataFile();
+		loadDataFile(datafile);
 
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_20);
 
@@ -85,12 +86,12 @@ public final class App {
 		}
 		template2.process(input, consoleWriter);
 
-		System.out.println("\n\n==== CY APP End ====\n");
-		System.out.println("ktjson:\n" + gson.toJson(KindTypeList));
+		System.out.println("\n\n==== HTML End ====\n");
+		System.out.println("const allKindTypes = \n\n" + gson.toJson(KindTypeList));
 	}
 
-	static void loadDataFile() throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get("/Users/chenyi/Downloads/Kindtype/updated_json_template_f.json")));
+	static void loadDataFile(String datafile) throws Exception {
+		String content = new String(Files.readAllBytes(Paths.get(datafile)));
 		JsonElement jelement = new JsonParser().parse(content);
 		JsonArray jarray = jelement.getAsJsonArray();
 
