@@ -3,8 +3,8 @@ Java util to generate survey questions for kind types with Amazon Mechanical Tur
 Freemarker template engine is used.  
 
 # Requirement
-Java version 1.8+ (e.g. java version "1.8.0_201")
-Apache Maven 3.6+
+- Java version 1.8+ (e.g. java version "1.8.0_201")
+- Apache Maven 3.6+
 
 # RUN
 ```
