@@ -1,14 +1,18 @@
-# kt_json2html
+# Project
 Java util to generate survey questions for kind types with Amazon Mechanical Turk.  
 Freemarker template engine is used.  
-  
+
+# Requirement
+Java version 1.8+ (e.g. java version "1.8.0_201")
+Apache Maven 3.6+
+
 # RUN
 ```
-mvn exec:java -Dexec.args="/path/updated_json_template_f.json"
+mvn exec:java -Dexec.args="/yourpath/updated_json_template_f.json"
 ```
 
 # Result
-Copy Html between
+Copy Html code between
 ```
 "==== HTML Start ====" and "==== HTML End ====". 
 ```

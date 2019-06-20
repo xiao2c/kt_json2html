@@ -33,7 +33,11 @@
 		position: absolute;
 		padding: 0rem 12rem 0rem 12rem;
 		font-size: 1rem;
-		
+	}
+	.sub-instruction {
+		position: absolute;
+		padding: 0rem 12rem 0rem 12rem;
+		font-size: 1rem;
 	}
 	table.treetable {
 		font-size: 1em;
@@ -79,6 +83,33 @@
         <a href="#" onclick="showHIT()" class="btn btn-info" id="link_consense">Continue</a>
     </div>
 
+	<div class="container-fluid sub-instruction" style="display:none" id="before_task1">
+		<div id="task1_breif_content">
+			<h4><b>Task Brief:</b></h4>
+			<p>... content ...</p>
+		</div>
+		<hr />
+		<a href="#" class="btn btn-info" id="link_enter_task1">Start Sub-Task 1</a>
+	</div>
+	
+	<div class="container-fluid sub-instruction" style="display:none" id="before_task2">
+		<div id="task2_breif_content">
+			<h4><b>Task Brief:</b></h4>
+			<p>... content ...</p>
+		</div>
+        <hr />
+        <a href="#" class="btn btn-info" id="link_enter_task2">Start Sub-Task 2</a>
+	</div>
+
+	<div class="container-fluid sub-instruction" style="display:none" id="before_task3">
+		<div id="task3_breif_content">
+			<h4><b>Task Brief:</b></h4>
+			<p>... content ...</p>
+		</div>
+		<hr />
+		<a href="#" class="btn btn-info" id="link_enter_task3">Start Sub-Task 3</a>
+	</div>
+
     <div class="container-fluid" style="display:none" id="d_hit">
         <div class="row mb-3" style="display:none" id="row_taskarea">
             <div class="col-3">
@@ -107,36 +138,15 @@
                         <input type="hidden" name="SelectedInstance" value="" />
 
                         <div id="welcome_page" style="display:none">
-                            <p><a href="#" onclick="stage_1()" class="btn btn-info">Start</a></p>
+                            <p><a href="#" onclick="pre_stage_1()" class="btn btn-info">Start</a></p>
                         </div>
 
                         <div id="stage_1_head" style="display:none">
                             <h5><b>Subtask 1:</b> Select appropriate categories for "${instance_name}" given its context in the example sentences on the left</h5>
-                            <a href="#" onClick="toggleInstruction('instruction_1')">Toggle additional instructions...</a><br />
-                            <div id="instruction_1">
-                                <ul>
-                                    <li>Categories will auto-update upon selection. Terminal categories will not.</li>
-                                    <li>To know more about a category, click on it to open a brief description and view sample nouns.</li>
-                                    <li>Categories can be deselected in case you wish to undo / realize a previously incorrect selection.</li>
-                                </ul>
-                            </div>
                             <br />
                         </div>
                         <div id="stage_2_head" style="display:none">
                             <h5><b>Subtask 2:</b> Assign an appropriate "kind" for this instance.</h5>
-                            <a href="#" onClick="toggleInstruction('instruction_2')">Toggle additional instructions...</a><br />
-                            <div id="instruction_2">
-                                <ul>
-                                    <li>A "kind" refers to a suitable group to which a noun belongs.</li>
-                                    <ul>
-                                        <li>'tiger','elephant' -> "MAMMAL" kind</li>
-                                        <li>'gear', 'vehicle' -> "VEHICLE_PARTS kind</li>
-                                        <li>'time', 'length' -> "ABSTRACT_UNIVERSAL_MEASURE"</li>
-                                    </ul>
-                                    <li>Given a choice between two kinds, choose the more specific kind (e.g. given tiger, 'MAMMAL' is more appropriate than 'ANIMAL')</li>
-                                    <li>If unsure, see whether the noun matches with sample instances of provided kinds.</li>
-                                </ul>
-                            </div>
                             <br />
                         </div>
 
@@ -661,13 +671,6 @@
                         <div id="kt_halfway" style="display:none">
                             <h5>Does this noun belong to following type?</h5>
                             <br />
-                            <a href="#" onClick="toggleInstruction('instruction_type')">Show/Hide additional instructions...</a><br />
-                            <div id="instruction_type">
-                                <ul>
-                                    <li>Remember to choose the kind based on the understanding from the context provided in the sentences</li>
-                                </ul>
-                            </div>
-                            <br />
                             <div>
                                 <strong>Type: <span id="h_kt_name"></span></strong><br />
                                 <span id="h_kt_desc"></span><br />
@@ -705,13 +708,6 @@
 
                         <div id="kt_suggest" style="display:none">
                             <h5><b>Subtask 2:</b> Please suggest a new "kind"/representative group for the noun</h5>
-                            <a href="#" onClick="toggleInstruction('instruction_newtype')">Toggle additional instructions...</a>
-                            <div id="instruction_newtype">
-                                <ul>
-                                    <li>Think of a representative group for the noun which captures conceptually similar nouns (e.g. "heat" might belong to "NATURAL_STATE" kind which can also identify "humidity, pressure,etc")</li>
-                                    <li>Remember to assign a kind based on your understanding of the noun given the example sentences.</li>
-                                </ul>
-                            </div>
                             <br />
                             Name of the new kind: <input type="text" name="suggested_kt" /><br /><br />
                             <div id="parent_kt_question" style="display:none">
@@ -739,7 +735,7 @@
                                 </table>
                                 
                             </div>
-                            <p><br /><a href="#" id="button2_to_stage3" class="btn btn-info">Next</a></p>
+                            <p><br /><a href="#" id="button2_to_stage3" class="btn btn-info">Next Subtask</a></p>
                         </div>
 
                         <div id="feature_filling" style="display:none">
@@ -773,7 +769,7 @@
                 <div class="card">
                     <div class="card-header">Expanded task brief and information <a href="#" data-toggle="collapse" data-target="#card1" style="font-size:0.6rem;font-weight:bold"> (Click to collapse/expand) </a></div>
                     <div id="card1" class="collapse show">
-                        <div class="card-body">
+                        <div class="card-body" id="subtask_breif_content">
                             <p><b>Task description:</b> You will be presented with a noun and example sentences containing the noun. <mark>Based on your understanding of the noun in the provided sentences,</mark> we require you to:</p>
 
                             <!--<p><b>Note:</b> To save your time, you can skip/collapse the below and start the task from the task page below. The task layout is designed to be intuitive and instructions are provided within. </p>-->
@@ -796,7 +792,7 @@
                                 <strong><mark>Quality of work: </mark></strong>
                                 We will be performing rigorous quality checks for collected responses. If your work is consistently incomplete, low quality or frequently disagreeing with the responses of other workers, we might have to reject your work.
                             </p>
-                            <a href="#" onclick="startTask()" class="btn btn-info">Continue</a>
+                            <a href="#" onclick="pre_stage_1()" class="btn btn-info">Continue</a>
                         </div>
                     </div>
                 </div>
@@ -926,9 +922,25 @@
             $("#welcome_page").show();
         }
 
+		function pre_stage_1() {
+			$("#welcome_page").hide();
+			$("#d_hit").hide();
+
+			// show instruction
+			$("#before_task1").show();
+			$("#link_enter_task1").on("click", function(e){
+				$("#card1").removeClass("show");
+				$("#row_taskarea").show();
+				$("#before_task1").hide();
+				$("#d_hit").show();
+				$("#subtask_breif_content").html($("#task1_breif_content").html());
+				stage_1();
+			});
+		}
+
         function stage_1() {
             stage = 1;
-            $("#welcome_page").hide();
+
             $("#instance_head").show();
             $("#the_instance").text(theInstance);
             $("#stage_1_head").show();
@@ -953,7 +965,7 @@
                     let v = $(this).val();
                     if (v === "yes") {
                         $("#kt_halfway").hide();
-                        stage_2([ktName]);
+                        pre_stage_2([ktName]);
                     } else {
                         $("#kt_halfway").hide();
                         $("#stage_1_head").show();
@@ -963,10 +975,22 @@
             });
         }
 
-        function stage_2(ktNameArray) {
-            $("div[id^='cat_childset_']:visible").hide();
-            // clear stage 1 displays and show stage 2 head
+		function pre_stage_2(ktNameArray) {
+			$("div[id^='cat_childset_']:visible").hide();
             $("#stage_1_head").hide();
+			$("#d_hit").hide();
+
+			// show instruction
+			$("#before_task2").show();
+			$("#link_enter_task2").on("click", function(e){
+				$("#before_task2").hide();
+				$("#d_hit").show();
+				$("#subtask_breif_content").html($("#task2_breif_content").html());
+				stage_2(ktNameArray);
+			});
+		}
+
+        function stage_2(ktNameArray) {
             $("#stage_2_head").show();
 
             for (let t = 0; t < ktNameArray.length; t++) {
@@ -992,6 +1016,15 @@
             $("#kt_selection").show();
             $("#kt_table").treetable("expandAll");
 
+			$("input[name='radio_ktname']").on("change", function(e) {
+				let selVal = $("input[name='radio_ktname']:checked").val();
+				if (selVal === "NOMATCH") {
+					$("#button1_to_stage3").text("Next");
+				} else {
+					$("#button1_to_stage3").text("Next Subtask");
+				}
+			});
+
             $("#button1_to_stage3").on("click", function(e) {
                 var radioValue = $("input[name='radio_ktname']:checked").val();
                 if (radioValue) {
@@ -1000,7 +1033,7 @@
                         $("#kt_selection").hide();
                         stage_2_1(true);
                     } else {
-                        stage_3(1); // case 1: select existing kt
+                        pre_stage_3(1); // case 1: select existing kt
                     }
                 } else {
                     toastr["warning"]("Please select a type from the table.").attr("style", "width: 600px !important; background-image: none !important");
@@ -1008,10 +1041,23 @@
             });
         }
 
-        // No kindtype is found for the selected categories, ask user to suggest a new type
-        function stage_2_1(getparent) {
+		function pre_stage_2_1(getparent) {
             $("div[id^='cat_childset_']:visible").hide();
             $("#stage_1_head").hide();
+			$("#d_hit").hide();
+
+			// show instruction
+			$("#before_task2").show();
+			$("#link_enter_task2").on("click", function(e){
+				$("#before_task2").hide();
+				$("#d_hit").show();
+				$("#subtask_breif_content").html($("#task2_breif_content").html());
+				stage_2_1(getparent);
+			});
+		}
+
+        // No kindtype is found for the selected categories, ask user to suggest a new type
+        function stage_2_1(getparent) {
             $("#kt_suggest").show();
 
             if (getparent) {
@@ -1035,7 +1081,7 @@
                     if (textValue && $.trim(textValue) !== "") {
                         var radioValue = $("input[name='radio_parent_ktname']:checked").val();
                         if (radioValue) {
-                            stage_3(2); // case 2: new kt, with existing parents
+                            pre_stage_3(2); // case 2: new kt, with existing parents
                         } else {
                             toastr["warning"]("Please select a parent type.").attr("style", "width: 600px !important; background-image: none !important");
                         }
@@ -1049,7 +1095,7 @@
                 $("#button2_to_stage3").on("click", function(e) {
                     var textValue = $("input[name='suggested_kt']").val();
                     if (textValue && $.trim(textValue) !== "") {
-                        stage_3(3); // case 3: new kt, no parent
+                        pre_stage_3(3); // case 3: new kt, no parent
                     } else {
                         toastr["warning"]("Please enter suggested name of a new type.").attr("style", "width: 600px !important; background-image: none !important");
                         $("input[name='suggested_kt']").val("");
@@ -1057,6 +1103,22 @@
                 });
             }
         }
+
+		function pre_stage_3(case_value) {
+			$("#stage_2_head").hide();
+			$("#kt_selection").hide();
+			$("#kt_suggest").hide();
+			$("#d_hit").hide();
+
+			// show instruction
+			$("#before_task3").show();
+			$("#link_enter_task3").on("click", function(e){
+				$("#before_task3").hide();
+				$("#d_hit").show();
+				$("#subtask_breif_content").html($("#task3_breif_content").html());
+				stage_3(case_value);
+			});
+		}
 
 		var all_selected_questions = [];
         function stage_3(case_value) {
@@ -1093,9 +1155,6 @@
 				all_selected_questions.push(questions.splice(Math.random()*questions.length,1)[0]);
 			}
 
-			$("#stage_2_head").hide();
-			$("#kt_selection").hide();
-			$("#kt_suggest").hide();
 			$("#feature_filling").show();
 
 			console.log("total number of questions selected: " + all_selected_questions.length);
@@ -1106,7 +1165,7 @@
 		function loopFeature(i) {
 			if(i < all_selected_questions.length) {
 				let q = all_selected_questions[i];
-                let str = "<strong>Question " + (i+1) + ": " + q + "</strong>";
+                let str = "<strong>Question " + (i+1) + "/"+all_selected_questions.length+" : " + q + "</strong>";
                 str += '<br><input type="text" style="width:450px" name="ans_'+(i+1)+'" id="ans_'+(i+1)+'">';
 				if(i < all_selected_questions.length-1){
 					str += '<p><br /><a href="javascript: qn_ans_list.push([\''+esquote(q)+'\', $(\'#ans_'+(i+1)+'\').val()]);loopFeature('+(i+1)+');" id="button3_to_stage4" class="btn btn-info">Next</a></p>';
@@ -1168,9 +1227,9 @@
         // functions for revert category
         function backTo(objname) {
             // locate the parent div of obj
-            let p = $("span[id='cat_" + objname + "']").parent();
+            let p = $("span[id='cat_" + objname + "']").closest("div");
             $(p).show();
-            $(p).children("input").prop("checked", false);
+            $(p).find("input").prop("checked", false);
 
             // traverse all grand children
             resetCat(objname);
@@ -1181,14 +1240,15 @@
 
         // clear and hide categories recursivly, remove from selected array
         function resetCat(objname) {
+			// console.log("function resetCat called with : " + objname);
             let i = selectedCategories.indexOf(objname);
             if (i >= 0) {
                 selectedCategories.splice(i, 1);
             }
             let d = $("div[id^='cat_childset_" + objname + "_']");
             if ($(d).length > 0) {
-                $(d).children("input").prop("checked", false);
-                $(d).children("input").each(function() {
+                $(d).find("input").prop("checked", false);
+                $(d).find("input").each(function() {
                         let name = this.value.substring(4);
                         resetCat(name);
                     });
@@ -1218,7 +1278,7 @@
             for(let i=0; i<pendingChildSets.length; i++) {
                 debugstr += pendingChildSets[i] + ", ";
             }
-            console.log("debugstr = " + debugstr);
+            console.log("Pending Queue: " + debugstr);
         }
 
         function showHIT() {
@@ -1230,11 +1290,6 @@
 
             $("#d_consense").hide();
             $("#d_hit").show();
-        }
-
-        function startTask() {
-            $("#card1").removeClass("show");
-            $("#row_taskarea").show();
         }
 
         // ***************************************************************************************
@@ -1284,7 +1339,7 @@
 			$("td[id^='td_examples-cat_']").each(function() {
 				let fullid = $(this).prop('id');
 				let catname = fullid.substring(16);
-				console.log("check substring, td_examples-cat_ " + catname);
+				// console.log("check substring, td_examples-cat_ " + catname);
 				// find the dialog contains description and sample
 				let newtext = $(es("#cat_"+catname+"_examples")).text();
 				$(this).text(newtext);
@@ -1339,19 +1394,19 @@
                             updateSelectedDisplay();
                             if (allselected) {
                                 $("#continue-subtask").on("click", function(e) {
-                                    stage_2(kt);
+                                    pre_stage_2(kt);
                                     $(this).hide();
                                 });
                                 $("#continue-subtask").show();
                             } else {
-                                // This the the case where there are still more categories but already matched a kindtype e.g. 'PART'
+                                // This is the case where there are still more categories but already matched a kindtype e.g. 'PART'
                                 stage_1_1(kt);
                             }
                         } else {
                             updateSelectedDisplay();
                             if (allselected) {
                                 $("#continue-subtask").on("click", function(e) {
-                                    stage_2_1(false);
+                                    pre_stage_2_1(false);
                                     $(this).hide();
                                 });
                                 $("#continue-subtask").show();
